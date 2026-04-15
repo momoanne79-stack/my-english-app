@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>수리나무학원 스마트 학습</title>
+    <title>수리나무 기초단어장2</title>
     <style>
         /* 🌳 수리나무학원 전용 컬러 팔레트 */
         :root {
@@ -24,10 +24,9 @@
         .logo-icon { font-size: 40px; margin-bottom: 10px; }
 
         .nav-container { padding: 0 15px; display: flex; justify-content: center; flex-wrap: wrap; gap: 8px; margin-bottom: 25px; }
-        .menu-btn { flex: 1; min-width: 70px; padding: 12px 10px; cursor: pointer; border: none; border-radius: 12px; background-color: #EDF2F7; color: #4A5568; font-weight: bold; font-size: 13px; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.05);}
+        .menu-btn { flex: 1; min-width: 80px; padding: 12px 10px; cursor: pointer; border: none; border-radius: 12px; background-color: #EDF2F7; color: #4A5568; font-weight: bold; font-size: 14px; transition: all 0.3s ease; box-shadow: 0 2px 5px rgba(0,0,0,0.05);}
         .menu-btn:hover { background-color: #E2E8F0; transform: translateY(-2px); }
         .menu-btn.active { background-color: var(--main-green); color: white; box-shadow: 0 4px 10px rgba(47, 133, 90, 0.3); }
-        .admin-btn { background-color: #EDF2F7; color: #805AD5; }
         
         .section { display: none; padding: 0 20px; animation: fadeIn 0.4s; }
         .section.active { display: block; }
@@ -36,22 +35,13 @@
         .play-btn { background: #E6FFFA; border: 2px solid #81E6D9; color: #285E61; padding: 12px 25px; border-radius: 50px; font-weight: bold; font-size: 16px; cursor: pointer; margin-bottom: 15px; transition: 0.2s; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
         .play-btn:hover { background: #B2F5EA; transform: scale(1.02); }
         
-        #word-options, #grammar-options { display: grid; gap: 12px; margin-bottom: 15px;}
+        #test-options { display: grid; gap: 12px; margin-bottom: 15px;}
         .option-btn { background: white; border: 2px solid #E2E8F0; padding: 16px; border-radius: 15px; font-size: 16px; cursor: pointer; transition: 0.2s; text-align: left; padding-left: 20px; font-weight: bold; color: var(--text-dark);}
         .option-btn:hover { border-color: var(--light-green); background: var(--bg-color); }
         .correct-btn { background-color: var(--light-green) !important; color: white !important; border-color: var(--light-green) !important; transform: scale(1.02); }
         
-        .word-block { display: inline-block; background-color: white; margin: 5px; padding: 12px 18px; border: 2px solid #CBD5E0; border-radius: 12px; cursor: pointer; font-size: 16px; font-weight: bold; color: var(--text-dark); box-shadow: 0 4px 6px rgba(0,0,0,0.05); transition: 0.1s;}
-        .word-block:active { transform: translateY(3px); box-shadow: none; }
-        
-        #answer-area { min-height: 60px; border: 2px dashed var(--main-green); background-color: var(--bg-color); margin-bottom: 20px; padding: 15px; border-radius: 15px; display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; align-items: center; transition: all 0.3s; }
-        #scrambled-words { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 20px; min-height: 50px;}
-        
-        input[type="text"], input[type="number"] { padding: 12px; font-size: 15px; border: 2px solid #E2E8F0; border-radius: 10px; margin-bottom: 5px; width: 85%; transition: 0.3s; outline: none;}
-        input[type="text"]:focus, input[type="number"]:focus { border-color: var(--light-green); }
-        
-        .submit-btn { padding: 14px 20px; margin-top: 10px; background-color: var(--main-green); color: white; border: none; border-radius: 12px; cursor: pointer; font-weight: bold; font-size: 16px; width: 95%; box-shadow: 0 4px 10px rgba(47, 133, 90, 0.3); transition: 0.2s;}
-        .submit-btn:hover { background-color: var(--light-green); }
+        input[type="number"] { padding: 12px; font-size: 15px; border: 2px solid #E2E8F0; border-radius: 10px; margin-bottom: 5px; transition: 0.3s; outline: none;}
+        input[type="number"]:focus { border-color: var(--light-green); }
         
         .setup-section { margin-bottom: 20px; padding: 15px; background: white; border: 1px solid #E2E8F0; border-radius: 15px; box-shadow: 0 2px 10px rgba(0,0,0,0.02); display: flex; align-items: center; justify-content: center; gap: 10px;}
         .setup-section button { padding: 10px 15px; margin: 0; background-color: var(--text-dark); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer;}
@@ -59,21 +49,16 @@
         .status-text { font-size: 15px; color: #718096; margin-bottom: 10px; font-weight: 800; background: #EDF2F7; display: inline-block; padding: 5px 15px; border-radius: 20px;}
         .word-box { font-size: 3rem; font-weight: 900; color: var(--main-green); margin: 20px 0; letter-spacing: -1px; }
         
-        .korean-meaning { font-size: 18px; color: #C53030; font-weight: bold; margin: 15px 0 25px 0; background-color: #FFF5F5; padding: 15px; border-radius: 12px; word-break: keep-all; border-left: 5px solid #F56565; text-align: left;}
-        
-        .admin-box { background-color: #FAF5FF; border: 1px solid #E9D8FD; padding: 20px; border-radius: 15px; margin-bottom: 20px; text-align: left; }
-        .admin-box h3 { margin-top: 0; color: #6B46C1; font-size: 18px; border-bottom: 2px solid #E9D8FD; padding-bottom: 10px; }
-        .admin-label { font-weight: bold; font-size: 14px; display: inline-block; width: 100%; margin-bottom: 5px; color: #4A5568;}
-        .save-btn { background-color: #6B46C1; color: white; border: none; padding: 12px; border-radius: 10px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 15px;}
-        
-        .admin-list { margin-top: 15px; font-size: 14px; max-height: 250px; overflow-y: auto; }
-        .admin-list-item { display: flex; justify-content: space-between; align-items: flex-start; background: white; padding: 12px; border: 1px solid #E2E8F0; border-radius: 8px; margin-bottom: 8px; flex-direction: column; gap: 8px;}
-        .delete-btn { background: #E53E3E; color: white; border: none; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-weight: bold; align-self: flex-end;}
+        /* 📖 단어장(리스트) 스타일 */
+        .word-list-item { background: white; border: 2px solid #E2E8F0; border-radius: 12px; padding: 15px; margin-bottom: 10px; text-align: left; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .word-list-en { font-size: 20px; font-weight: 900; color: var(--main-green); }
+        .word-list-ph { font-size: 14px; color: #718096; font-weight: normal; margin-left: 5px; }
+        .word-list-ko { font-size: 16px; color: #E53E3E; font-weight: bold; margin-top: 5px; }
 
-        /* 📅 학습기록(숙제검사) 스타일 */
+        /* 📅 학습기록 스타일 */
         .history-card { background: white; border: 2px solid #E2E8F0; border-radius: 12px; padding: 15px; margin-bottom: 12px; text-align: left; box-shadow: 0 4px 6px rgba(0,0,0,0.02); }
         .history-date { font-size: 18px; font-weight: 900; color: var(--main-green); margin-bottom: 10px; border-bottom: 2px solid #E2E8F0; padding-bottom: 8px;}
-        .history-stat { font-size: 15px; color: var(--text-dark); margin: 6px 0; font-weight: bold;}
+        .history-stat { font-size: 16px; color: var(--text-dark); margin: 6px 0; font-weight: bold;}
         .stamp-excellent { color: #E53E3E; font-weight: 900; font-size: 22px; float: right; transform: rotate(-15deg); border: 3px solid #E53E3E; padding: 4px 10px; border-radius: 10px; opacity: 0.9;}
     </style>
 </head>
@@ -82,373 +67,980 @@
 <div id="app-container">
     <div class="app-header">
         <div class="logo-icon">🌳</div>
-        <h1>수리나무학원</h1>
+        <h1>수리나무 기초단어장2</h1>
         <p>내 손안의 스마트 영어 학습 센터</p>
     </div>
     
     <div class="nav-container">
-        <button id="nav-word" class="menu-btn active" onclick="showSection('word-section', this)">1. 단어</button>
-        <button id="nav-sentence" class="menu-btn" onclick="showSection('sentence-section', this)">2. 영작</button>
-        <button id="nav-grammar" class="menu-btn" onclick="showSection('grammar-section', this)">3. 문법</button>
-        <button id="nav-history" class="menu-btn" onclick="showSection('history-section', this); renderHistory();">4. 기록</button>
-        <button class="menu-btn admin-btn" onclick="checkAdminPassword()">⚙️ 설정</button>
+        <button id="nav-wordlist" class="menu-btn active" onclick="showSection('wordlist-section', this)">1. 단어장</button>
+        <button id="nav-wordtest" class="menu-btn" onclick="showSection('wordtest-section', this)">2. 단어테스트</button>
+        <button id="nav-history" class="menu-btn" onclick="showSection('history-section', this); renderHistory();">3. 기록</button>
     </div>
 
-    <div id="word-section" class="section active">
+    <div id="wordlist-section" class="section active">
         <div class="setup-section">
             <strong>단어 이동: </strong> 
-            <input type="number" id="startNum" value="1" min="1" style="width: 70px; text-align: center;">
-            <button onclick="jumpToWord()">GO 🚀</button>
+            <input type="number" id="listStartNum" value="1" min="1" style="width: 70px; text-align: center;">
+            <button onclick="showWordList()">30개 보기 🚀</button>
         </div>
-        <div class="status-text" id="word-status">문제 1 / 891</div>
-        <div id="word-display" class="word-box">Loading...</div>
-        <button class="play-btn" onclick="speakWord()">🔊 원어민 발음 듣기</button>
-        <div id="word-options"></div>
+        <p style="font-size: 13px; color: #718096; font-weight:bold; margin-bottom: 15px;">※ 입력한 번호부터 30개의 단어가 표시됩니다.</p>
+        <div id="word-list-container">
+            </div>
     </div>
 
-    <div id="sentence-section" class="section">
-        <div class="setup-section">
-            <strong>문장 이동: </strong> 
-            <input type="number" id="startSenNum" value="1" min="1" style="width: 70px; text-align: center;">
-            <button onclick="jumpToSentence()">GO 🚀</button>
-        </div>
-        <h3 style="color: var(--main-green); margin-bottom: 5px;">뜻을 보고 단어를 순서대로 터치하세요</h3>
-        <div class="status-text" id="sentence-status">문제 1 / 126</div>
-        <div id="sentence-ko-text" class="korean-meaning">한글 뜻 로딩중...</div>
-        <div id="answer-area"></div>
-        <div id="scrambled-words"></div>
-        <div style="background: #EBF8FF; padding: 10px; border-radius: 10px; margin-top: 15px;">
-            <p style="font-size: 13px; color: #2B6CB0; margin: 0; font-weight: bold;">🎧 음성이 자동으로 무한 반복 재생됩니다.</p>
-        </div>
-    </div>
-
-    <div id="grammar-section" class="section">
+    <div id="wordtest-section" class="section">
         <div class="setup-section">
             <strong>문제 이동: </strong> 
-            <input type="number" id="startGrammarNum" value="1" min="1" style="width: 70px; text-align: center;">
-            <button onclick="jumpToGrammar()">GO 🚀</button>
+            <input type="number" id="testStartNum" value="1" min="1" style="width: 70px; text-align: center;">
+            <button onclick="jumpToTestWord()">GO 🚀</button>
         </div>
-        <h3 style="color: var(--main-green);">빈칸에 알맞은 단어를 고르세요</h3>
-        <div class="status-text" id="grammar-status">문제 1 / 100</div>
-        <p id="grammar-question-text" style="font-size: 22px; font-weight: bold; margin: 30px 0 20px 0; color: var(--text-dark);"></p>
-        <div id="grammar-options"></div>
+        <div class="status-text" id="test-status">문제 1 / 891</div>
+        <div id="test-display" class="word-box">Loading...</div>
+        <button class="play-btn" onclick="speakTestWord()">🔊 원어민 발음 듣기</button>
+        <div id="test-options"></div>
     </div>
 
     <div id="history-section" class="section">
-        <h3 style="color: var(--main-green); margin-top:0;">📅 날짜별 숙제 검사</h3>
-        <p style="font-size: 13px; color: #718096; margin-bottom: 20px; font-weight:bold;">※ 학생이 정답을 맞힌 개수가 폰에 자동 기록됩니다.</p>
+        <h3 style="color: var(--main-green); margin-top:0;">📅 날짜별 학습 기록</h3>
+        <p style="font-size: 13px; color: #718096; margin-bottom: 20px; font-weight:bold;">※ 단어 테스트 정답 개수가 자동 기록됩니다.</p>
         <div id="history-list"></div>
-    </div>
-
-    <div id="admin-section" class="section">
-        <h2 style="color: #6B46C1; margin-top:0;">🔒 선생님 출제 모드</h2>
-        <div class="admin-box">
-            <h3>2. 영작 문제 관리</h3>
-            <div style="margin-bottom: 10px;">
-                <span class="admin-label">영어 문장 (띄어쓰기로 구분):</span>
-                <input type="text" id="admin-sentence-en" placeholder="예: I love playing soccer." style="width:90%;">
-            </div>
-            <div>
-                <span class="admin-label">한글 뜻:</span>
-                <input type="text" id="admin-sentence-ko" placeholder="예: 나는 축구하는 것을 사랑한다." style="width:90%;">
-            </div>
-            <button class="save-btn" onclick="addSentence()">➕ 영작 문제 추가하기</button>
-            <div id="admin-sentence-list" class="admin-list"></div>
-        </div>
-        <div class="admin-box">
-            <h3 style="color: #E53E3E; border-bottom-color: #FEB2B2;">※ 문법 문제는 100문제 4지선다로 고정 세팅되어 있습니다.</h3>
-        </div>
     </div>
 </div>
 
 <script>
-    // ==========================================
-    // 1. 단어 데이터 (891개)
-    // ==========================================
-    const fullText = `1. tall [톨] 키큰, 높은 / 2. cut [컷] 자르다, 베다 / 3. nice [나이스] 좋은, 멋진 / 4. have [해브] 가지다, 먹다 / 5. actor [액터] 배우 / 6. many [매니] 많은 / 7. see [씨] 보다 / 8. from [프롬] ~에서부터 / 9. what [왓] 무엇, 무슨 / 10. old [올드] 오래된, 나이든 / 11. meet [미트] 만나다 / 12. make [메이크] 만들다 / 13. friend [프렌드] 친구 / 14. cap [캡] 모자 / 15. large [라지] 큰, 넓은, 많은 / 16. heavy [헤비] 무거운 / 17. long [롱] 오랜, 긴 / 18. school [스쿨] 학교 / 19. come from [컴 프롬] ~출신이다 / 20. be going to [비 고잉 투] ~할 것이다 / 21. happy [해피] 행복한 / 22. room [룸] 방 / 23. dance [댄스] 춤추다 / 24. fun [펀] 재미있는 / 25. clean [클린] 깨끗한 / 26. bean [빈] 콩 / 27. light [라이트] 빛, 가벼운 / 28. for [포] ~동안, 위하여 / 29. good [굿] 좋은, 착한 / 30. short [쇼트] 짧은, 키작은 / 31. eat [잇] 먹다 / 32. too [투] 또한, 너무 / 33. lunch [런치] 점심식사 / 34. wait [웨이트] 기다리다 / 35. student [스튜던트] 학생 / 36. model [모델] 모형, 모델 / 37. out [아웃] 밖에 / 38. young [영] 어린, 젊은 / 39. go to school [고 투 스쿨] 학교에 다니다 / 40. make friends [메이크 프렌즈] 친구가 되다 / 41. all [올] 모든 / 42. city [시티] 도시 / 43. day [데이] 날, 하루 / 44. smart [스마트] 영리한 / 45. look [룩] 보다, ~보이다 / 46. teacher [티처] 선생님 / 47. watch [워치] 보다, 손목시계 / 48. to [투] ~으로 / 49. house [하우스] 집 / 50. hobby [하비] 취미 / 51. like [라이크] 좋아하다 / 52. new [뉴] 새로운 / 53. ago [어고] ~전에, 이전에 / 54. classmate [클래스메이트] 반친구 / 55. dancer [댄서] 무용수 / 56. dinner [디너] 저녁식사 / 57. dirty [더티] 더러운 / 58. study [스터디] 공부하다 / 59. have fun [해브 펀] 즐겁게 보내다 / 60. eat out [잇 아웃] 외식하다 / 61. enter [엔터] 들어가다 / 62. body [바디] 몸, 신체 / 63. act [액트] 행동하다, 연기하다 / 64. bad [배드] 나쁜 / 65. classroom [클래스룸] 교실 / 66. flower [플라워] 꽃 / 67. color [컬러] 색깔 / 68. in [인] 안에 / 69. minute [미닛] 분 / 70. sand [샌드] 모래 / 71. star [스타] 별 / 72. wet [웻] 젖은 / 73. yesterday [예스터데이] 어제 / 74. hot [핫] 더운, 매운 / 75. late [레이트] 늦은, 지각한 / 76. well [웰] 잘 / 77. beach [비치] 해변 / 78. who [후] 누구 / 79. look like [룩 라이크] 처럼 보이다 / 80. all day [올 데이] 하루종일 / 81. feel [필] 느끼다 / 82. cold [콜드] 추운 / 83. sad [새드] 슬픈 / 84. class [클래스] 학급, 수업 / 85. family [패밀리] 가족 / 86. really [리얼리] 실제로 / 87. hour [아워] 한시간 / 88. at [앳] 에 / 89. rain [레인] 비, 비오다 / 90. dry [드라이] 마른, 건조한 / 91. time [타임] 시간 / 92. last [라스트] 지난, 마지막의 / 93. morning [모닝] 아침 / 94. leave [리브] 떠나다 / 95. movie [무비] 영화 / 96. sour [사워] 신, 시큼한 / 97. meet [미트] 만나다 / 98. lake [레이크] 호수 / 99. look for [룩 포] ~을 찾다 / 100. again [어게인] 또, 다시 / 101. home [홈] 집, 가정 / 102. kid [키드] 어린이, 아이 / 103. baker [베이커] 제빵사 / 104. cool [쿨] 시원한 / 105. ready [레디] 준비가 된 / 106. test [테스트] 시험, 검사 / 107. with [위드] ~와 함께 / 108. week [위크] 주 / 109. far [파] 먼, 멀리 / 110. sun [선] 태양, 햇볕 / 111. town [타운] 마을, 도심 / 112. rainy [레이니] 비가 오는 / 113. hair [헤어] 머리카락 / 114. funny [퍼니] 우스운, 재미있는 / 115. sea [씨] 바다 / 116. night [나이트] 밤 / 117. people [피플] 사람들 / 118. be good at [비 굿 앳] ~을 잘하다 / 119. watch out(for) [워치 아웃 포] ~을 주의, 조심하다 / 120. say [세이] 말하다 / 121. where [웨어] 어디에 / 122. bakery [베이커리] 빵집 / 123. word [워드] 단어, 말 / 124. thin [씬] 얇은, 마른 / 125. play [플레이] 놀다, 연주하다 / 126. child [차일드] 어린이 / 127. after [애프터] ~후에 / 128. start [스타트] 시작하다 / 129. dark [다크] 어두운 / 130. read [리드] 읽다 / 131. evening [이브닝] 저녁 / 132. open [오픈] 열다, 열린 / 133. every [에브리] 모든, 매~ / 134. fill [필] 채우다 / 135. name [네임] 이름 / 136. floor [플로어] 바닥, 층 / 137. knife [나이프] 칼 / 138. again and again [어게인 앤 어게인] 몇 번이고, 되풀이해서 / 139. be happy with [비 해피 위드] ~에 기뻐, 만족하다 / 140. easy [이지] 쉬운 / 141. cute [큐트] 귀여운 / 142. know [노우] 알다 / 143. daughter [도터] 딸 / 144. player [플레이어] 선수 / 145. window [윈도우] 창문 / 146. close [클로즈] 닫다, 가까운 / 147. of [오브] ~의 / 148. cook [쿡] 요리하다, 요리사 / 149. then [덴] 그 당시, 그때 / 150. fat [팻] 살찐, 뚱뚱한 / 151. snow [스노우] 눈, 눈이 오다 / 152. handsome [핸섬] 잘생긴 / 153. sick [식] 아픈, 병든 / 154. month [먼스] 달, 월 / 155. work [워크] 일하다, 공부하다 / 156. rock [락] 바위, 돌 / 157. next [넥스트] 다음의 / 158. after school [애프터 스쿨] 방과 후에 / 159. say hello to [세이 헬로 투] ~에게 안부를 전하다 / 160. end [엔드] 끝, 종료 / 161. year [이어] 해, 년 / 162. group [그룹] 집단, 무리 / 163. there [데어] 거기에 / 164. afternoon [애프터눈] 오후 / 165. wear [웨어] 입다, 쓰다 / 166. theater [시어터] 극장 / 167. on [온] 위에, (요일)에 / 168. hear [히어] 듣다, 들리다 / 169. story [스토리] 이야기 / 170. sound [사운드] 소리, 음성 / 171. hungry [헝그리] 배고픈 / 172. run [런] 달리다 / 173. kind [카인드] 친절한, 종류 / 174. round [라운드] 둥근 / 175. loud [라우드] 소리가 큰 / 176. push [푸시] 밀다 / 177. bright [브라이트] 밝은 / 178. next to [넥스트 투] ~옆에 / 179. fill in [필 인] ~을 채우다 / 180. air [에어] 공기 / 181. hard [하드] 어려운, 단단한 / 182. listen [리슨] 듣다 / 183. full [풀] 가득 찬 / 184. music [뮤직] 음악 / 185. animal [애니멀] 동물 / 186. beautiful [뷰티풀] 아름다운 / 187. up [업] 위로 / 188. weekend [위크엔드] 주말 / 189. sit [싯] 앉다 / 190. put [풋] 놓다, 두다 / 191. warm [웜] 따뜻한 / 192. pull [풀] 당기다 / 193. north [노스] 북쪽 / 194. noise [노이즈] 소음 / 195. door [도어] 문 / 196. size [사이즈] 크기, 치수 / 197. how [하우] 어떻게, 얼마나 / 198. go on [고 온] 계속하다 / 199. fly [플라이] 날다 / 200. way [웨이] 방법, 길 / 201. earth [어스] 지구, 흙 / 202. voice [보이스] 목소리 / 203. get [겟] 얻다, 받다 / 204. thick [띠크] 두꺼운 / 205. knock [노크] 노크하다 / 206. down [다운] 아래로 / 207. fight [파이트] 싸우다 / 208. fast [패스트] 빠른, 빨리 / 209. ride [라이드] 타다 / 210. grow [그로우] 자라다 / 211. pocket [포켓] 주머니 / 212. sweet [스위트] 달콤한 / 213. hit [히트] 때리다 / 214. mountain [마운틴] 산 / 215. loudly [라우들리] 크게 / 216. easily [이질리] 쉽게 / 217. make fun of [메이크 펀 오브] 놀리다 / 218. put on [풋 온] 입다 / 219. sky [스카이] 하늘 / 220. bicycle [바이시클] 자전거 / 221. today [투데이] 오늘 / 222. angry [앵그리] 화난 / 223. slow [슬로우] 느린 / 224. back [백] 등, 뒤 / 225. rice [라이스] 쌀, 밥 / 226. about [어바웃] ~에 대하여 / 227. person [퍼슨] 사람 / 228. cry [크라이] 울다 / 229. hat [햇] 모자 / 230. deep [딥] 깊은 / 231. parent [패런트] 부모 / 232. drive [드라이] 운전하다 / 233. often [오픈] 흔히, 자주 / 234. find [파인드] 찾다, 발견하다 / 235. low [로우] 낮은, 적은 / 236. fruit [프루트] 과일 / 237. at last [앳 라스트] 마침내 / 238. on one's way to [온 원즈 웨이 투] ~로 가는 도중에 / 239. date [데이트] 날짜 / 240. talk [토크] 이야기하다 / 241. birthday [버스데이] 생일 / 242. work [워크] 일하다 / 243. here [히어] 여기에 / 244. country [컨트리] 시골, 나라 / 245. price [프라이스] 값, 가격 / 246. by [바이] 옆에, 에 의해 / 247. alone [얼론] 혼자인, 외로운 / 248. high [하이] 높은, 높이 / 249. set [셋] 놓다, 맞추다 / 250. wall [월] 벽, 담 / 251. driver [드라이버] 운전자 / 252. each [이치] 각자의, 각각의 / 253. slowly [슬로울리] 느리게 / 254. table [테이블] 탁자 / 255. pick [픽] 고르다 / 256. cloud [클라우드] 구름 / 257. find out [파인드 아웃] ~을 알아내다 / 258. grow up [그로우 업] 성장하다 / 259. alarm [알람] 알람, 경보 / 260. weather [웨더] 날씨 / 261. some [썸] 약간의 / 262. think [띵크] 생각하다 / 263. buy [바이] 사다 / 264. speak [스피크] 말하다 / 265. cloudy [클라우디] 구름 낀, 흐린 / 266. before [비포] 전에, 하기 전에 / 267. ship [쉽] 배, 선박 / 268. east [이스트] 동쪽 / 269. everyone [에브리원] 모든 사람, 모두 / 270. paint [페인트] 페인트, 그리다 / 271. tomorrow [투모로우] 내일 / 272. map [맵] 지도 / 273. half [하프] 절반 / 274. idea [아이디어] 생각 / 275. holiday [홀리데이] 휴일 / 276. kick [킥] 차다 / 277. by the way [바이 더 웨이] 그나저나, 그런데 / 278. up and down [업 앤 다운] 위아래로 / 279. life [라이프] 삶, 인생 / 280. board [보드] 게시판, 판자 / 281. brush [브러쉬] 붓, 솔 / 282. tooth [투스] 이, 치아 / 283. little [리틀] 작은, 어린 / 284. call [콜] 전화하다, 부르다 / 285. market [마켓] 시장 / 286. around [어라운드] 둘레에 / 287. speaker [스피크] 말하는 사람 / 288. fine [파인] 훌륭한 / 289. someday [썸데이] 언젠가 / 290. much [머치] 많은 / 291. sleep [슬립] 잠자다 / 292. use [유즈] 사용하다 / 293. why [와이] 왜 / 294. present [프레젠트] 선물, 현재의 / 295. pet [펫] 애완동물 / 296. key [키] 열쇠 / 297. get up [겟 업] 일어나다 / 298. any [애니] 아무것도, 약간 / 299. always [올웨이즈] 항상 / 300. train [트레인] 기차 / 301. want [원트] 원하다 / 302. water [워터] 물, 물을 주다 / 303. backpack [백팩] 배낭 / 304. tonight [투나잇] 오늘밤 / 305. because [비코즈] 때문에, 왜냐하면 / 306. strong [스트롱] 강한, 힘센 / 307. fall [폴] 가을, 떨어지다 / 308. under [언더] ~아래에 / 309. glass [글래스] 유리, 잔 / 310. when [웬] 언제 / 311. give [기브] 주다 / 312. subway [서브웨이] 지하철 / 313. street [스트리트] 거리 / 314. police [폴리스] 경찰 / 315. painter [페인터] 화가 / 316. get well [겟 웰] 나아지다, 회복하다 / 317. look around [룩 어라운드] 둘레를 보다 / 318. busy [비지] 바쁜, 혼잡한 / 319. early [얼리] 일찍, 빨리 / 320. food [푸드] 음식 / 321. almost [올모스트] 거의 / 322. bring [브링] 가져오다 / 323. draw [드로우] 그리다 / 324. cross [크로스] 건너다 / 325. over [오버] ~위에 / 326. sing [싱] 노래하다 / 327. doctor [닥터] 의사 / 328. special [스페셜] 특별한 / 329. week [위크] 주 / 330. stair [스테어] 계단 / 331. which [위치] 어느것 / 332. road [로드] 도로, 길 / 333. kitchen [키친] 주방, 부엌 / 334. snack [스낵] 간식 / 335. pair [페어] 한 쌍 / 336. these days [디즈 데이즈] 요즘 / 337. get it [겟 잇] 이해하다 / 338. bottle [보틀] 병 / 339. clock [클락] 시계 / 340. dream [드림] 꿈 / 341. complete [컴플리트] 완료하다 / 342. season [시즌] 계절 / 343. die [다이] 죽다 / 344. store [스토어] 상점, 가게 / 345. off [오프] 떨어져, 멀리 / 346. sell [셀] 팔다 / 347. mouth [마우스] 입 / 348. glove [글래브] 장갑 / 349. dish [디쉬] 접시, 그릇 / 350. heart [하트] 심장, 마음 / 351. picture [픽처] 그림, 사진 / 352. leaf [리프] 나뭇잎 / 353. hospital [하스피탈] 병원 / 354. bridge [브릿지] 다리 / 355. useful [유스풀] 유용한 / 356. see a doctor [씨 어 닥터] 진찰을 받다 / 357. pick up [픽 업] 집어 올리다 / 358. age [에이지] 나이 / 359. bath [배쓰] 목목 / 360. cousin [커즌] 사촌 / 361. enjoy [인조이] 즐기다 / 362. ask [애스크] 묻다 / 363. only [온리] 오직 / 364. take [테이크] 가져가다, 잡다 / 365. into [인투] 안으로 / 366. bread [브레드] 빵 / 367. wash [워시] 씻다 / 368. sure [슈어] 확신하는 / 369. shoe [슈] 신발, 구두 / 370. wind [윈드] 바람 / 371. cheap [칩] 싼 / 372. love [러브] 사랑, 사랑하다 / 373. husband [허즈번드] 남편 / 374. vegetable [베지터블] 채소 / 375. teach [티치] 가르치다 / 376. do the dishes [두 더 디시즈] 설거지를 하다 / 377. be over [비 오버] 끝나다 / 378. art [아트] 예술, 미술 / 379. show [쇼] 보여주다 / 380. airplane [에어플레인] 비행기 / 381. become [비컴] ~이 되다 / 382. boat [보트] 보트 / 383. question [퀘스천] 질문 / 384. send [센드] 보내다, 발송하다 / 385. inside [인사이드] 안쪽 / 386. jump [점프] 점프하다 / 387. run [런] 달리다 / 388. true [트루] 진실한 / 389. move [무브] 움직이다 / 390. dessert [디저트] 후식 / 391. square [스퀘어] 정사각형 / 392. world [월드] 세계 / 393. restaurant [레스토랑] 식당 / 394. picnic [피크닉] 소풍 / 395. shop [숍] 가게 / 396. for sure [포 슈어] 확실히 / 397. arrive [어라이브] 도착하다 / 398. bathroom [배스룸] 욕실 / 399. case [케이스] 케이스, 상자 / 400. library [라이브러리] 도서관 / 401. online [온라인] 온라인의 / 402. straight [스트레이트] 똑바로 / 403. try [트라이] 노력하다, 시도하다 / 404. near [니어] 가까이, 가까운 / 405. begin [비긴] 시작하다 / 406. finish [피니시] 끝내다 / 407. boss [보스] 상사 / 408. quick [퀵] 빠른 / 409. rich [리치] 부유한 / 410. stand [스탠드] 서다 / 411. sorry [쏘리] 미안한 / 412. lesson [레슨] 레슨, 수업 / 413. wake [웨이크] 깨다 / 414. let [렛] ~하게 하다, 허락하다 / 415. come true [컴 트루] 이루어지다 / 416. one by one [원 바이 원] 한 사람씩 / 417. turn [턴] 돌다 / 418. airport [에어포트] 공항 / 419. catch [캐치] 잡다 / 420. pretty [프리티] 예쁜 / 421. breakfast [브렉퍼스트] 아침식사 / 422. trip [트립] 여행 / 423. hill [힐] 언덕 / 424. as [애즈] ~로써 / 425. homework [홈워크] 숙제 / 426. touch [터치] 만지다 / 427. side [사이드] 측면 / 428. letter [레터] 편지 / 429. middle [미들] 중앙 / 430. fresh [프레시] 신선한 / 431. poor [푸어] 가난한 / 432. soft [소프트] 부드러운 / 433. garden [가든] 정원 / 434. gate [게이트] 대문, 문 / 435. try on [트라이 온] ~을 입어보다 / 436. talk on the phone [토크 온 더 폰] 통화하다 / 437. gift [기프트] 선물 / 438. laugh [래프] 웃다 / 439. close [클로즈] 닫다 / 440. strange [스트레인지] 이상한 / 441. glad [글래드] 기쁜 / 442. ahead [어헤드] 앞으로, 앞에 / 443. corner [코너] 구석 / 444. artist [아티스트] 화가, 예술가 / 445. restroom [레스트룸] 화장실, 욕실 / 446. straw [스트로] 짚, 빨대 / 447. thank [땡크] 감사하다 / 448. windy [윈디] 바람이 부는 / 449. answer [앤서] 대답하다 / 450. write [라이트] 쓰다 / 451. money [머니] 돈 / 452. painting [페인팅] 그림 / 453. team [팀] 팀 / 454. future [퓨처] 미래 / 455. turn on [턴 온] 켜다 / 456. show up [쇼 업] 나타나다 / 457. top [탑] 꼭대기 / 458. active [액티브] 활동적인 / 459. bank [뱅크] 은행 / 460. feed [피드] 먹이를 주다 / 461. style [스타일] 스타일 / 462. throat [쓰로트] 목구멍 / 463. drawing [드로잉] 그림 / 464. so [쏘] 그래서 / 465. seat [시트] 좌석 / 466. lie [라이] 눕다, 거짓말하다 / 467. fish [피시] 물고기 / 468. dress [드레스] 드레스 / 469. away [어웨이] 떨어져 / 470. job [잡] 직업 / 471. right [라이트] 맞는, 오른쪽의 / 472. museum [뮤지엄] 박물관 / 473. lucky [럭키] 운이 좋은 / 474. excellent [엑설런트] 훌륭한 / 475. laugh at [래프 앳] ~을 비웃다 / 476. thanks to [땡크스 투] ~덕분에 / 477. tie [타이] 묶다, 매다 / 478. smell [스멜] 냄새가 나다 / 479. leave [리브] 떠나다, 남기다 / 480. change [체인지] 변화하다 / 481. fan [팬] 부채, 선풍기 / 482. poster [포스터] 포스터 / 483. wrong [롱] 잘못된 / 484. across [어크로스] 가로질러 / 485. volunteer [볼런티어] 자원봉사자 / 486. type [타입] 유형 / 487. great [그레이트] 훌륭한 / 488. together [투게더] 함께 / 489. hold [홀드] 잡다 / 490. exit [엑시트] 출구 / 491. favorite [페이버릿] 매우 좋아하는 / 492. speed [스피드] 속도 / 493. thing [띵] 물건, 것 / 494. stage [스테이지] 무대 / 495. get to [겟 투] ~에 도착하다 / 496. action [액션] 행동, 조치 / 497. sun [선] 태양 / 498. wish [위시] 바라다, 소원 / 499. number [넘버] 수, 숫자 / 500. careful [케어풀] 주의 깊은 / 501. fire [파이어] 불, 불꽃 / 502. grandparent [그랜드패런트] 조부모 / 503. between [비트윈] ~사이에 / 504. clear [클리어] 분명한, 맑은 / 505. break [브레이크] 휴식 / 506. station [스테이션] 역, 정류장 / 507. south [사우스] 남쪽 / 508. free [프리] 자유로운 / 509. smile [스마일] 웃다, 미소 짓다 / 510. piece [피스] 조각 / 511. umbrella [엄브렐라] 우산 / 512. paper [페이퍼] 종이 / 513. ticket [티켓] 표 / 514. hold on [홀드 온] 기다리다 / 515. take turns [테이크 턴즈] 교대로 하다 / 516. add [애드] 추가하다, 합하다 / 517. example [이그잼플] 예, 사례 / 518. care [케어] 돌봄 / 519. think [싱크] 생각하다 / 520. manager [매니저] 관리자 / 521. ocean [오션] 대양, 바다 / 522. help [헬프] 돕다 / 523. sunny [써니] 화창한 / 524. choose [추즈] 고르다 / 525. dentist [덴티스트] 치과의사 / 526. swim [스윔] 수영하다 / 527. throw [쓰로우] 던지다 / 528. front [프론트] 앞면 / 529. living room [리빙 룸] 거실 / 530. message [메시지] 메시지 / 531. need [니드] 필요하다 / 532. west [웨스트] 서쪽 / 533. rule [룰] 규칙, 규정 / 534. ask for [애스크 포] ~을 요구하다 / 535. take off [테이크 오프] ~을 벗다 / 536. tell [텔] 말하다 / 537. bone [본] 뼈 / 538. stone [스톤] 돌 / 539. keep [킵] 유지하다 / 540. fix [픽스] 고치다 / 541. diary [다이어리] 일기 / 542. mathematics [매스매틱스] 수학 / 543. below [빌로우] 아래에 / 544. concert [콘서트] 연주회, 콘서트 / 545. fact [팩트] 사실 / 546. moment [모먼트] 순간, 시점 / 547. soon [순] 곧 / 548. park [파크] 공원 / 549. triangle [트라이앵글] 삼각형 / 550. once [원스] 한 번 / 551. tired [타이어드] 피곤한 / 552. hurt [허트] 다치게 하다 / 553. line [라인] 선, 줄 / 554. get on [겟 온] 타다 / 555. for free [포 프리] 무료로 / 556. also [올소] 또한 / 557. activity [액티비티] 활동 / 558. stop [스톱] 멈추다 / 559. hope [호프] 희망하다 / 560. science [사이언스] 과학 / 561. cost [코스트] 비용 / 562. bookstore [북스토어] 서점 / 563. delicious [딜리셔스] 맛있는 / 564. wood [우드] 나무, 목재 / 565. musician [뮤지션] 음악가 / 566. land [랜드] 토지, 땅 / 567. mall [몰] 쇼핑몰 / 568. point [포인트] 요점, 가르키다 / 569. role [롤] 역할, 임무 / 570. step [스텝] 걸음, 단계 / 571. taste [테이스트] 맛 / 572. text [텍스트] 본문 / 573. moon [문] 달 / 574. run away [런 어웨이] 도망가다 / 575. line up [라인 업] 줄을 서다 / 576. plan [플랜] 계획 / 577. best [베스트] 최고의 / 578. carefully [케어풀리] 조심스럽게 / 579. forget [포겟] 잊다 / 580. review [리뷰] 평론, 복습 / 581. agree [어그리] 동의하다 / 582. teen [틴] 십대 / 583. above [어보브] 보다 위에 / 584. scientist [사이언티스트] 과학자 / 585. surprise [서프라이즈] 놀라게 하다 / 586. other [아더] 다른 / 587. magic [매직] 마법 / 588. toe [토] 발가락 / 589. skill [스킬] 기술 / 590. wife [와이프] 아내 / 591. mix [믹스] 섞다 / 592. just [저스트] 단지 / 593. tasty [테이스티] 맛있는 / 594. give up [기브 업] 포기하다 / 595. wide [와이드] 넓은 / 596. area [에어리어] 지역, 구역 / 597. band [밴드] 밴드, 띠 / 598. nail [네일] 손톱, 못 / 599. expensive [익스펜시브] 비싼 / 600. correct [커렉트] 정확한, 옳은 / 601. photograph [포토그래프] 사진 / 602. along [얼롱] ~을 따라서 / 603. build [빌드] 짓다 / 604. proud [프라우드] 자랑스러워하는 / 605. shake [쉐이크] 흔들리다, 흔들다 / 606. ring [링] 반지, 울리다 / 607. shape [쉐이프] 모양 / 608. hunt [헌트] 사냥하다 / 609. drop [드롭] 떨어지다, 방울 / 610. sunglasses [선글라스] 선글라스 / 611. film [필름] 영화 / 612. office [오피스] 사무실 / 613. each other [이치 아더] 서로 / 614. few [퓨] 거의 없는 / 615. danger [데인저] 위험 / 616. camp [캠프] 캠프, 야영지 / 617. building [빌딩] 건물 / 618. afraid [어프레이드] 두려워하는 / 619. basket [바스켓] 바구니 / 620. note [노트] 노트, 메모 / 621. until [언틸] ~까지 / 622. singer [싱어] 가수 / 623. someone [썸원] 누구, 어떤 사람 / 624. teenager [틴에이저] 십대 / 625. musical [뮤지컬] 음악의, 뮤지컬 / 626. bake [베이크] 굽다 / 627. pot [팟] 솥, 냄비 / 628. plant [플랜트] 식물, 심다 / 629. seafood [씨푸드] 해산물 / 630. island [아일랜드] 섬 / 631. grass [그래스] 풀 / 632. stop by [스톱 바이] 잠시 들르다 / 633. be proud of [비 프라우드 오브] ~을 자랑스러워하다 / 634. blow [블로우] 불다 / 635. cheer [치어] 환호, 응원하다 / 636. false [폴스] 거짓의, 틀린 / 637. gas [가스] 기체, 가스 / 638. lose [루즈] 잃어버리다, 지다 / 639. history [히스토리] 역사 / 640. textbook [텍스트북] 교과서 / 641. through [스루] 지나서, 통하여 / 642. visit [비지트] 방문하다 / 643. count [카운트] (수를) 세다 / 644. forest [포레스트] 숲 / 645. hall [홀] 복도, 홀 / 646. safe [세이프] 안전한 / 647. pass [패스] 지나가다, 통과하다 / 648. shadow [섀도우] 그림자 / 649. miss [미스] 놓치다, 그리워하다 / 650. same [세임] 같은, 동일한 / 651. tail [테일] 꼬리 / 652. a little [어 리틀] 조금인, 약간의 / 653. fall in love [폴 인 러브] 사랑에 빠지다 / 654. oil [오일] 기름, 석유 / 655. difficult [디피컬트] 어려운 / 656. travel [트래블] 여행하다 / 657. part [파트] 부분, 일부 / 658. mirror [미러] 거울 / 659. boring [보링] 지루한, 따분한 / 660. examination [이그재미네이션] 시험 / 661. check [체크] 확인하다 / 662. receive [리시브] 받다 / 663. different [디퍼런트] 다른 / 664. enough [이너프] 충분한 / 665. worry [워리] 걱정하다 / 666. still [스틸] 아직도, 여전히 / 667. gym [짐] 체육관 / 668. spend [스펜드] 쓰다, 소비하다 / 669. rest [레스트] 휴식하다 / 670. climb [클라임] 오르다 / 671. lazy [레이지] 게으른 / 672. cheer up [치어 업] 격려하다 / 673. write down [라이트 다운] ~을 적다 / 674. chef [셰프] 요리사, 주방장 / 675. boil [보일] 끓다 / 676. exciting [익사이팅] 흥미진진한 / 677. already [올레디] 이미, 벌써 / 678. speech [스피치] 연설 / 679. guess [게스] 추측하다 / 680. weight [웨이트] 무게, 체중 / 681. anything [애니띵] 무엇이든 / 682. sometimes [썸타임즈] 때때로, 가끔 / 683. river [리버] 강 / 684. farm [팜] 농장 / 685. remember [리멤버] 기억하다 / 686. interest [인터레스트] 흥미, 관심 / 687. most [모스트] 최대, 대부분의 / 688. place [플레이스] 장소 / 689. company [컴퍼니] 회사 / 690. space [스페이스] 우주, 공간 / 691. health [헬스] 건강 / 692. hand in [핸드 인] ~을 제출하다 / 693. take out [테이크 아웃] ~을 꺼내다 / 694. bored [보어드] 지루한 / 695. goal [골] 목표, 골 / 696. healthy [헬시] 건강한 / 697. farmer [파머] 농부 / 698. pay [페이] 지불하다 / 699. stomach [스토머크] 복부, 배, 위 / 700. something [썸띵] 어떤 것 / 701. while [와일] ~동안에 / 702. beat [비트] 때리다, 이기다 / 703. hang [행] 걸다, 매달다 / 704. lovely [러블리] 사랑스러운 / 705. honest [어니스트] 정직한 / 706. understand [언더스탠드] 이해하다 / 707. interesting [인터레스팅] 흥미로운, 재미있는 / 708. rope [로프] 밧줄, 로프 / 709. pour [포어] 붓다, 퍼붓다 / 710. club [클럽] 동호회 / 711. writer [라이터] 작가 / 712. on time [온 타임] 제시간에 / 713. be worried about [비 워리드 어바웃] ~에 대해 걱정하다 / 714. list [리스트] 명단, 목록 / 715. project [프로젝트] 프로젝트 / 716. carry [캐리] 나르다, 운반하다 / 717. empty [엠프티] 비어 있는 / 718. famous [페이머스] 유명한 / 719. raise [레이즈] 올리다, 기르다 / 720. drink [드링크] 마시다 / 721. behind [비하인드] ~의 뒤에 / 722. stay [스테이] 머무르다 / 723. another [어나더] 또 다른 / 724. surprising [서프라이징] 놀라운 / 725. outside [아웃사이드] 밖의 / 726. stick [스틱] 막대기 / 727. vacation [베케이션] 방학, 휴가 / 728. interested [인터레스티드] 흥미 있는 / 729. dead [데드] 죽은 / 730. beef [비프] 소고기 / 731. excuse [익스큐즈] 용서하다 / 732. work out [워크 아웃] 운동하다 / 733. hang out [행 아웃] 어울려 놀다 / 734. believe [빌리브] 믿다 / 735. calm [캄] 침착한 / 736. dangerous [데인저러스] 위험한 / 737. festival [페스티벌] 축제 / 738. shy [샤이] 부끄러워하는 / 739. lonely [론리] 외로운 / 740. spicy [스파이시] 매콤한 / 741. wonder [원더] 궁금하다 / 742. solve [솔브] 풀다, 해결하다 / 743. fail [페일] 실패하다 / 744. neighbor [네이버] 이웃 / 745. ground [그라운드] 지면, 땅 / 746. circle [서클] 원 / 747. important [임포턴트] 중요한 / 748. pond [폰드] 연못 / 749. role [롤] 역할 / 750. deer [디어] 사슴 / 751. practice [프랙티스] 연습하다 / 752. get out of [겟 아웃 오브] ~에서 나가다 / 753. give it a try [기브 잇 어 트라이] 한번 해보다 / 754. bill [빌] 고지서 / 755. collect [콜렉트] 수집하다 / 756. surprised [서프라이즈드] 놀란 / 757. join [조인] 가입하다 / 758. blank [블랭크] 빈칸 / 759. problem [프라블럼] 문제 / 760. crash [크래시] 충돌하다 / 761. however [하우에버] 그러나 / 762. secret [시크릿] 비밀 / 763. record [레코드] 기록 / 764. hometown [홈타운] 고향 / 765. race [레이스] 경주 / 766. bowl [보울] 그릇 / 767. daily [데일리] 매일의 / 768. newspaper [뉴스페이퍼] 신문 / 769. tip [팁] 조언 / 770. wonderful [원더풀] 아주 멋진 / 771. own [오운] 자신의 / 772. be interested in [비 인터레스티드 인] ~에 관심이 있다 / 773. believe in [빌리브 인] ~의 존재를 믿다 / 774. lift [리프트] 들어 올리다 / 775. bottom [바텀] 바닥 / 776. hole [홀] 구멍 / 777. dialogue [다이얼로그] 대화 / 778. real [리얼] 진짜의 / 779. news [뉴스] 뉴스 / 780. jungle [정글] 정글 / 781. form [폼] 유형 / 782. sunlight [선라이트] 햇빛 / 783. contest [콘테스트] 대회 / 784. brave [브레이브] 용감한 / 785. hurry [허리] 서두르다 / 786. magazine [매거진] 잡지 / 787. welcome [웰컴] 환영하다 / 788. sleepy [슬리피] 졸린 / 789. protect [프로텍트] 보호하다 / 790. matter [매터] 문제 / 791. fast [패스트] 빠른 / 792. take place [테이크 플레이스] 개최되다 / 793. fry [프라이] 튀기다, 볶다 / 794. advice [어드바이스] 조언, 충고 / 795. course [코스] 강좌, 항로 / 796. habit [해빗] 습관, 버릇 / 797. sign [사인] 표지판, 서명하다 / 798. perfect [퍼펙트] 완벽한 / 799. heat [히트] 열, 더위 / 800. without [위드아웃] ~없이 / 801. colorful [컬러풀] 다채로운 / 802. never [네버] 결코 ~않다 / 803. tea [티] 차 / 804. trouble [트러블] 문제 / 805. okay [오케이] 괜찮은 / 806. honey [허니] 꿀 / 807. sport [스포츠] 스포츠 / 808. friendly [프렌들리] 친절한 / 809. serve [서브] 제공하다 / 810. uniform [유니폼] 제복 / 811. all the time [올 더 타임] 항상, 늘 / 812. for a while [포 어 와일] 잠시 동안 / 813. field [필] 들판, 밭 / 814. blind [블라인드] 눈먼 / 815. center [센터] 중심 / 816. headache [헤드에이크] 두통 / 817. score [스코어] 점수 / 818. pilot [파일럿] 조종사 / 819. everything [에브리띵] 모든 것 / 820. during [듀어링] ~동안 / 821. luck [럭] 행운 / 822. nickname [닉네임] 별명 / 823. mistake [미스테이크] 실수 / 824. greet [그리트] 인사하다 / 825. sharp [샤프] 날카로운 / 826. usual [유주얼] 평소의 / 827. cough [커프] 기침하다 / 828. fashion [패션] 유행 패션 / 829. plate [플레이트] 접시 / 830. meal [밀] 식사 / 831. of course [오브 코스] 물론 / 832. on one's own [온 원즈 오운] 스스로 / 833. mind [마인드] 마음, 정신 / 834. win [윈] 이기다 / 835. amazing [어메이징] 놀라운 / 836. borrow [바로우] 빌리다 / 837. comic [코믹] 만화의 / 838. garbage [가비지] 쓰레기 / 839. sale [세일] 판매 / 840. nothing [낫띵] 아무것도 ~아니다 / 841. director [디렉터] 감독 / 842. cell phone [셀 폰] 휴대전화 / 843. tour [투어] 여행 / 844. share [쉐어] 공유하다 / 845. wrap [랩] 싸다, 포장하다 / 846. energy [에너지] 에너지 / 847. gather [개더] 모이다 / 848. happen [해픈] 일어나다 / 849. usually [유주얼리] 대개 / 850. prize [프라이즈] 상 / 851. cut down [컷 다운] 줄이다 / 852. would like to [우드 라이크 투] ~하고 싶다 / 853. joy [조이] 기쁨 / 854. award [어워드] 상 / 855. nurse [너스] 간호사 / 856. quiet [콰이어트] 조용한 / 857. cartoon [카툰] 만화 / 858. excited [익사이티드] 신이 난 / 859. melt [멜트] 녹다 / 860. grade [그레이드] 학년, 성적 / 861. helpful [헬프풀] 도움이 되는 / 862. post [포스트] 우편, 게시하다 / 863. sentence [센텐스] 문장 / 864. trash [트래쉬] 쓰레기 / 865. design [디자인] 디자인 / 866. subject [서브젝트] 과목, 주제 / 867. match [매치] 경기 / 868. village [빌리지] 마을 / 869. insect [인섹트] 곤충 / 870. possible [파서블] 가능한 / 871. count on [카운트 온] ~을 믿다 / 872. at the same time [앳 더 세임 타임] 동시에 / 873. event [이벤트] 행사 / 874. nature [네이처] 자연 / 875. level [레벨] 수준 / 876. create [크리에이트] 창조하다 / 877. shout [샤우트] 소리치다 / 878. animation [애니메이션] 애니메이션 / 879. cause [코즈] 원인 / 880. information [인포메이션] 정보 / 881. designer [디자이너] 디자이너 / 882. pack [팩] 싸다 / 883. meeting [미팅] 회의 / 884. quiz [퀴즈] 퀴즈 / 885. wise [와이즈] 지혜로운 / 886. fantastic [판타스틱] 환상적인 / 887. piece [피스] 한 조각 / 888. opinion [오피니언] 의견 / 889. relax [릴랙스] 휴식을 취하다 / 890. flat [플랫] 평평한 / 891. throw away [쓰로우 어웨이] 버리다`;
-
-    const wordList = fullText.split(' / ').reduce((acc, item) => {
-        const match = item.match(/\d+\.\s(.+)\s\[(.+)\]\s(.+)/);
-        if(match) {
-            acc.push({ en: match[1].trim(), phonetic: match[2].trim(), ans: match[3].trim() });
-        }
-        return acc;
-    }, []);
-
-    let currentWordIdx = 0;
-
-    // ==========================================
-    // 2. 영작 데이터 (126문장)
-    // ==========================================
-    let sentenceList = [
-        { en: "I'm Jihun.", ko: "나는 지훈이야." },
-        { en: "My best friend is Minsu.", ko: "내 가장 친한 친구는 민수야." },
-        { en: "Minsu and I love rock music.", ko: "민수와 나는 록 음악을 좋아해." },
-        { en: "We are members of the school band Rock It.", ko: "우리는 학교 밴드 Rock It의 멤버야." },
-        { en: "I play the guitar, and Minsu plays the drums.", ko: "나는 기타를 치고, 민수는 드럼을 쳐." },
-        { en: "We are not good players, but we have so much fun together.", ko: "우리는 훌륭한 연주자는 아니지만, 함께 아주 재미있게 보내." },
-        { en: "With Minsu, I laugh all the time.", ko: "민수와 함께라면, 나는 항상 웃어." },
-        { en: "Together, we are happy.", ko: "함께라서, 우리는 행복해." },
-        { en: "I'm Hannah.", ko: "나는 한나야." },
-        { en: "Mrs. Schmidt, my neighbor, is a dear friend to me.", ko: "내 이웃인 슈미트 아주머니는 나에게 소중한 친구야." },
-        { en: "She is a great listener, and I often talk with her.", ko: "그녀는 내 말을 아주 잘 들어주시고, 나는 종종 그녀와 이야기해." },
-        { en: "She doesn't talk much.", ko: "그녀는 말씀을 많이 하지 않으셔." },
-        { en: "She just nods and smiles at me.", ko: "그녀는 그저 고개를 끄덕이고 나에게 미소를 지어주셔." },
-        { en: "Sometimes I'm sad, and she bakes a cake for me.", ko: "가끔 내가 슬플 때면, 그녀는 나를 위해 케이크를 구워주셔." },
-        { en: "Her cake is yummy, and I feel all right, like magic.", ko: "그녀의 케이크는 맛있고, 나는 마법처럼 괜찮아져." },
-        { en: "With Mrs. Schmidt, I feel at home.", ko: "슈미트 아주머니와 함께 있으면 나는 편안함을 느껴." },
-        { en: "Together, we are happy.", ko: "함께라서, 우리는 행복해." },
-        { en: "I'm Tim.", ko: "나는 팀이야." },
-        { en: "Hope is my guide dog and my best friend.", ko: "호프는 내 안내견이자 가장 친한 친구야." },
-        { en: "She is by my side 24/7.", ko: "그녀는 24시간 내내 내 곁에 있어." },
-        { en: "She even goes to school with me.", ko: "그녀는 심지어 나와 함께 학교에도 가." },
-        { en: "Is she a good student?", ko: "그녀는 좋은 학생일까?" },
-        { en: "Well, she mostly sleeps in class, but the teachers don't mind.", ko: "음, 그녀는 수업 시간에 주로 자지만, 선생님들은 신경 쓰지 않으셔." },
-        { en: "On weekends, we go to the park and play together.", ko: "주말에 우리는 공원에 가서 함께 놀아." },
-        { en: "With Hope, I feel free and strong.", ko: "호프와 함께 있으면 나는 자유롭고 강해진 기분이야." },
-        { en: "Together, we are happy.", ko: "함께라서, 우리는 행복해." },
-        { en: "Hello, everyone! Welcome to Teens' Kitchen.", ko: "안녕하세요, 여러분! 십대들의 주방에 오신 것을 환영합니다." },
-        { en: "Today, we have three teen chefs on the show.", ko: "오늘, 우리는 이 프로그램에 세 명의 십대 셰프를 모셨습니다." },
-        { en: "They're making healthy and delicious snacks, and they will tell us about them.", ko: "그들은 건강하고 맛있는 간식을 만들고 있으며, 그것들에 대해 우리에게 이야기해 줄 것입니다." },
-        { en: "Ciao, I'm Bella from Italy.", ko: "안녕, 나는 이탈리아에서 온 벨라야." },
-        { en: "I'm making caprese skewers.", ko: "나는 카프레제 꼬치를 만들고 있어." },
-        { en: "Anyone can make these.", ko: "누구나 이것들을 만들 수 있어." },
-        { en: "You just need mozzarella cheese, cherry tomatoes, and basil leaves.", ko: "너는 모짜렐라 치즈, 방울토마토, 그리고 바질 잎만 있으면 돼." },
-        { en: "Just put them on skewers, and they'll become healthy snacks.", ko: "그냥 그것들을 꼬치에 꽂기만 하면 건강한 간식이 될 거야." },
-        { en: "Caprese skewers are low in calories, so I often eat them as a light snack.", ko: "카프레제 꼬치는 칼로리가 낮아서 나는 가벼운 간식으로 종종 먹어." },
-        { en: "Hi, I'm Mina from Korea, and I'm baking tofu chips.", ko: "안녕, 나는 한국에서 온 미나고, 두부 칩을 굽고 있어." },
-        { en: "Unlike other chips, my tofu chips are healthy.", ko: "다른 칩들과 달리, 내 두부 칩은 건강해." },
-        { en: "Why?", ko: "왜냐고?" },
-        { en: "I don't fry my chips but bake them.", ko: "나는 내 칩을 튀기지 않고 구워." },
-        { en: "I don't use any flour, either.", ko: "나는 밀가루도 전혀 사용하지 않아." },
-        { en: "I use only tofu.", ko: "나는 오직 두부만 사용해." },
-        { en: "Eat the tofu chips with honey or garlic powder.", ko: "두부 칩을 꿀이나 마늘 가루와 함께 먹어봐." },
-        { en: "They'll taste good.", ko: "맛있을 거야." },
-        { en: "Hello, everyone. I'm Miguel from Brazil.", ko: "안녕하세요, 여러분. 저는 브라질에서 온 미겔입니다." },
-        { en: "I'm making an acai bowl right now.", ko: "저는 지금 아사이 볼을 만들고 있어요." },
-        { en: "It's a thick acai berry smoothie in a bowl.", ko: "그것은 그릇에 담긴 걸쭉한 아사이 베리 스무디입니다." },
-        { en: "You can add other healthy foods like nuts and bananas, and it'll taste really good.", ko: "견과류나 바나나 같은 다른 건강한 음식들을 추가할 수 있고, 그러면 정말 맛있을 거예요." },
-        { en: "Acai berries are a superfood, and people all over the world enjoy them.", ko: "아사이 베리는 슈퍼푸드이고, 전 세계 사람들이 즐겨 먹습니다." },
-        { en: "Every year, Yuna's school holds a dance contest.", ko: "매년 유나의 학교는 댄스 대회를 엽니다." },
-        { en: "This year's contest is next month.", ko: "올해 대회는 다음 달입니다." },
-        { en: "Let's make a team and enter the contest.", ko: "팀을 만들어서 대회에 나가자." },
-        { en: "Are you kidding?", ko: "장난해?" },
-        { en: "We're all terrible dancers.", ko: "우리는 모두 춤을 정말 못 춰." },
-        { en: "I know, but I'm interested.", ko: "알아, 하지만 난 관심이 있어." },
-        { en: "Me, too.", ko: "나도 그래." },
-        { en: "It'll be fun.", ko: "재미있을 거야." },
-        { en: "Let's do it.", ko: "해보자." },
-        { en: "Sounds good, Suho?", ko: "수호야, 괜찮아?" },
-        { en: "I guess so.", ko: "그런 것 같아." },
-        { en: "What will happen next?", ko: "다음엔 무슨 일이 일어날까요?" },
-        { en: "Read the following two different situations.", ko: "다음의 두 가지 다른 상황을 읽어보세요." },
-        { en: "Yuna and her teammates are in the practice room, but no one looks happy.", ko: "유나와 팀원들은 연습실에 있지만, 아무도 행복해 보이지 않습니다." },
-        { en: "We're making too many mistakes.", ko: "우리는 실수를 너무 많이 하고 있어." },
-        { en: "Yeah. We're hopeless.", ko: "응. 우린 가망이 없어." },
-        { en: "By the way, where's Minsu?", ko: "그나저나 민수는 어디 있어?" },
-        { en: "Well, he's sick. He texted me.", ko: "음, 걔 아프대. 나한테 문자 했어." },
-        { en: "Really? I saw him last night, and he was all right.", ko: "정말? 어젯밤에 봤는데 괜찮았어." },
-        { en: "The contest is tomorrow, but Yuna and her teammates are not practicing.", ko: "대회가 내일이지만, 유나와 팀원들은 연습을 하고 있지 않습니다." },
-        { en: "I'm so tired.", ko: "나 너무 피곤해." },
-        { en: "Me, too. We're not getting anywhere.", ko: "나도. 우리는 아무런 진전이 없어." },
-        { en: "Yeah. We're just wasting our time.", ko: "응. 우린 그냥 시간 낭비하고 있는 거야." },
-        { en: "The dance contest was not a good idea.", ko: "댄스 대회는 좋은 생각이 아니었어." },
-        { en: "I agree, but it's not your fault.", ko: "동의해, 하지만 네 잘못은 아니야." },
-        { en: "Why don't we just quit?", ko: "우리 그냥 그만두는 게 어때?" },
-        { en: "After weeks of unhappy practices, they finally quit.", ko: "몇 주간의 불행한 연습 후에, 그들은 결국 그만두었습니다." },
-        { en: "They felt hopeless.", ko: "그들은 절망감을 느꼈습니다." },
-        { en: "Yuna and her teammates are practicing hard in the practice room.", ko: "유나와 팀원들은 연습실에서 열심히 연습하고 있습니다." },
-        { en: "I made a mistake again. I'm sorry.", ko: "내가 또 실수했어. 미안해." },
-        { en: "Cheer up! You can do it.", ko: "기운 내! 넌 할 수 있어." },
-        { en: "Yes. Don't worry, Suho. We all make mistakes.", ko: "응. 걱정 마, 수호야. 우리는 모두 실수를 해." },
-        { en: "Come on. Let's do it one more time! We're almost there.", ko: "자. 한 번 더 해보자! 거의 다 왔어." },
-        { en: "The contest is over now.", ko: "이제 대회가 끝났습니다." },
-        { en: "Yuna's team didn't win any prizes, but they all look happy.", ko: "유나의 팀은 상을 타지는 못했지만, 모두 행복해 보입니다." },
-        { en: "Good job! We made it.", ko: "잘했어! 우리가 해냈어." },
-        { en: "Yeah! We finished the dance without a big mistake. I feel great!", ko: "응! 우리는 큰 실수 없이 춤을 끝냈어. 기분이 정말 좋아!" },
-        { en: "We did our best, and I'm so proud of all of us.", ko: "우리는 최선을 다했고, 난 우리 모두가 정말 자랑스러워." },
-        { en: "Thank you for your support, everyone.", ko: "모두 응원해 줘서 고마워." },
-        { en: "Hi Sumi,", ko: "안녕 수미," },
-        { en: "Yesterday, my family and I came to Ronda in Spain.", ko: "어제 우리 가족과 나는 스페인의 론다에 왔어." },
-        { en: "Most buildings here are white, and they are so beautiful against the blue sky.", ko: "이곳의 대부분의 건물들은 하얗고 파란 하늘과 대비되어 정말 아름다워." },
-        { en: "And the views!", ko: "그리고 경치는 또 어떻고!" },
-        { en: "Ronda is on cliffs, so the views are fantastic.", ko: "론다는 절벽 위에 있어서 경치가 환상적이야." },
-        { en: "Now, we're eating lunch on the terrace of a restaurant.", ko: "지금 우리는 식당 테라스에서 점심을 먹고 있어." },
-        { en: "All the food here is great, but I especially like the churros.", ko: "이곳 음식은 모두 훌륭하지만, 나는 특히 추로스가 좋아." },
-        { en: "After lunch, we're going to visit the Ernest Hemingway Walk.", ko: "점심을 먹은 후에, 우리는 어니스트 헤밍웨이의 산책로에 갈 거야." },
-        { en: "Hemingway loved Ronda and spent many summers here.", ko: "헤밍웨이는 론다를 사랑했고 여기서 많은 여름을 보냈대." },
-        { en: "Your friend, Minji", ko: "너의 친구, 민지" },
-        { en: "Hi Inho,", ko: "안녕 인호," },
-        { en: "I'm in Chefchaouen, the Blue Pearl of Morocco.", ko: "나는 모로코의 푸른 진주, 셰프샤우엔에 있어." },
-        { en: "All day long, I enjoyed taking pictures of the blue streets and blue buildings.", ko: "하루 종일, 나는 푸른 거리와 푸른 건물들 사진 찍는 것을 즐겼어." },
-        { en: "I also enjoyed walking through the narrow streets.", ko: "나는 또한 좁은 거리를 걷는 것도 즐겼지." },
-        { en: "They were full of interesting shops, and I bought some souvenirs.", ko: "그곳들은 흥미로운 상점들로 가득했고, 나는 기념품을 좀 샀어." },
-        { en: "Now, I'm drinking mint tea at a tea house, just like the locals.", ko: "지금, 나는 현지인들처럼 찻집에서 민트 차를 마시고 있어." },
-        { en: "Chefchaouen is famous for its sunrises.", ko: "셰프샤우엔은 일출로 유명해." },
-        { en: "Tomorrow, I'm going to get up early and enjoy a beautiful sunrise.", ko: "내일 나는 일찍 일어나서 아름다운 일출을 감상할 거야." },
-        { en: "Best, Uncle Jay", ko: "제이 삼촌이" },
-        { en: "Dear Mom,", ko: "엄마에게," },
-        { en: "I'm on Purple Island in Korea.", ko: "나는 한국의 퍼플 섬에 있어." },
-        { en: "Almost everything here is purple—the houses, the buses, and even the bridges.", ko: "이곳의 거의 모든 것이 보라색이야 - 집들, 버스들, 심지어 다리들까지." },
-        { en: "Purple is my favorite color, so the island is just perfect for me.", ko: "보라색은 내가 가장 좋아하는 색이라서 이 섬은 나에게 완벽해." },
-        { en: "I didn't even pay the entrance fee to the island.", ko: "나는 심지어 섬 입장료도 내지 않았어." },
-        { en: "Why? I was wearing a purple T-shirt.", ko: "왜냐고? 내가 보라색 티셔츠를 입고 있었거든." },
-        { en: "Now, I'm on my way to a bike rental shop.", ko: "지금 나는 자전거 대여소로 가는 길이야." },
-        { en: "The island is not big, so I'm going to explore it by bicycle.", ko: "섬이 크지 않아서 나는 자전거로 섬을 둘러볼 거야." },
-        { en: "I'm especially looking forward to visiting the Lavender Garden.", ko: "나는 특히 라벤더 정원에 가는 것이 정말 기대돼." },
-        { en: "Love, Amy", ko: "사랑하는 에이미가" }
+    // --- 1. 단어 데이터 ---
+    const rawData = [
+        {en:"tall",ph:"톨",ans:"키큰, 높은"},
+        {en:"cut",ph:"컷",ans:"자르다, 베다"},
+        {en:"nice",ph:"나이스",ans:"좋은, 멋진"},
+        {en:"have",ph:"해브",ans:"가지다, 먹다"},
+        {en:"actor",ph:"액터",ans:"배우"},
+        {en:"many",ph:"매니",ans:"많은"},
+        {en:"see",ph:"씨",ans:"보다"},
+        {en:"from",ph:"프롬",ans:"~에서부터"},
+        {en:"what",ph:"왓",ans:"무엇, 무슨"},
+        {en:"old",ph:"올드",ans:"오래된, 나이든"},
+        {en:"meet",ph:"미트",ans:"만나다"},
+        {en:"make",ph:"메이크",ans:"만들다"},
+        {en:"friend",ph:"프렌드",ans:"친구"},
+        {en:"cap",ph:"캡",ans:"모자"},
+        {en:"large",ph:"라지",ans:"큰, 넓은, 많은"},
+        {en:"heavy",ph:"헤비",ans:"무거운"},
+        {en:"long",ph:"롱",ans:"오랜, 긴"},
+        {en:"school",ph:"스쿨",ans:"학교"},
+        {en:"come from",ph:"컴 프롬",ans:"~출신이다"},
+        {en:"be going to",ph:"비 고잉 투",ans:"~할 것이다"},
+        {en:"happy",ph:"해피",ans:"행복한"},
+        {en:"room",ph:"룸",ans:"방"},
+        {en:"dance",ph:"댄스",ans:"춤추다"},
+        {en:"fun",ph:"펀",ans:"재미있는"},
+        {en:"clean",ph:"클린",ans:"깨끗한"},
+        {en:"bean",ph:"빈",ans:"콩"},
+        {en:"light",ph:"라이트",ans:"빛, 가벼운"},
+        {en:"for",ph:"포",ans:"~동안, 위하여"},
+        {en:"good",ph:"굿",ans:"좋은, 착한"},
+        {en:"short",ph:"쇼트",ans:"짧은, 키작은"},
+        {en:"eat",ph:"잇",ans:"먹다"},
+        {en:"too",ph:"투",ans:"또한, 너무"},
+        {en:"lunch",ph:"런치",ans:"점심식사"},
+        {en:"wait",ph:"웨이트",ans:"기다리다"},
+        {en:"student",ph:"스튜던트",ans:"학생"},
+        {en:"model",ph:"모델",ans:"모형, 모델"},
+        {en:"out",ph:"아웃",ans:"밖에"},
+        {en:"young",ph:"영",ans:"어린, 젊은"},
+        {en:"go to school",ph:"고 투 스쿨",ans:"학교에 다니다"},
+        {en:"make friends",ph:"메이크 프렌즈",ans:"친구가 되다"},
+        {en:"all",ph:"올",ans:"모든"},
+        {en:"city",ph:"시티",ans:"도시"},
+        {en:"day",ph:"데이",ans:"날, 하루"},
+        {en:"smart",ph:"스마트",ans:"영리한"},
+        {en:"look",ph:"룩",ans:"보다, ~보이다"},
+        {en:"teacher",ph:"티처",ans:"선생님"},
+        {en:"watch",ph:"워치",ans:"보다, 손목시계"},
+        {en:"to",ph:"투",ans:"~으로"},
+        {en:"house",ph:"하우스",ans:"집"},
+        {en:"hobby",ph:"하비",ans:"취미"},
+        {en:"like",ph:"라이크",ans:"좋아하다"},
+        {en:"new",ph:"뉴",ans:"새로운"},
+        {en:"ago",ph:"어고",ans:"~전에, 이전에"},
+        {en:"classmate",ph:"클래스메이트",ans:"반친구"},
+        {en:"dancer",ph:"댄서",ans:"무용수"},
+        {en:"dinner",ph:"디너",ans:"저녁식사"},
+        {en:"dirty",ph:"더티",ans:"더러운"},
+        {en:"study",ph:"스터디",ans:"공부하다"},
+        {en:"have fun",ph:"해브 펀",ans:"즐겁게 보내다"},
+        {en:"eat out",ph:"잇 아웃",ans:"외식하다"},
+        {en:"enter",ph:"엔터",ans:"들어가다"},
+        {en:"body",ph:"바디",ans:"몸, 신체"},
+        {en:"act",ph:"액트",ans:"행동하다, 연기하다"},
+        {en:"bad",ph:"배드",ans:"나쁜"},
+        {en:"classroom",ph:"클래스룸",ans:"교실"},
+        {en:"flower",ph:"플라워",ans:"꽃"},
+        {en:"color",ph:"컬러",ans:"색깔"},
+        {en:"in",ph:"인",ans:"안에"},
+        {en:"minute",ph:"미닛",ans:"분"},
+        {en:"sand",ph:"샌드",ans:"모래"},
+        {en:"star",ph:"스타",ans:"별"},
+        {en:"wet",ph:"웻",ans:"젖은"},
+        {en:"yesterday",ph:"예스터데이",ans:"어제"},
+        {en:"hot",ph:"핫",ans:"더운, 매운"},
+        {en:"late",ph:"레이트",ans:"늦은, 지각한"},
+        {en:"well",ph:"웰",ans:"잘"},
+        {en:"beach",ph:"비치",ans:"해변"},
+        {en:"who",ph:"후",ans:"누구"},
+        {en:"look like",ph:"룩 라이크",ans:"처럼 보이다"},
+        {en:"all day",ph:"올 데이",ans:"하루종일"},
+        {en:"feel",ph:"필",ans:"느끼다"},
+        {en:"cold",ph:"콜드",ans:"추운"},
+        {en:"sad",ph:"새드",ans:"슬픈"},
+        {en:"class",ph:"클래스",ans:"학급, 수업"},
+        {en:"family",ph:"패밀리",ans:"가족"},
+        {en:"really",ph:"리얼리",ans:"실제로"},
+        {en:"hour",ph:"아워",ans:"한시간"},
+        {en:"at",ph:"앳",ans:"에"},
+        {en:"rain",ph:"레인",ans:"비, 비오다"},
+        {en:"dry",ph:"드라이",ans:"마른, 건조한"},
+        {en:"time",ph:"타임",ans:"시간"},
+        {en:"last",ph:"라스트",ans:"지난, 마지막의"},
+        {en:"morning",ph:"모닝",ans:"아침"},
+        {en:"leave",ph:"리브",ans:"떠나다"},
+        {en:"movie",ph:"무비",ans:"영화"},
+        {en:"sour",ph:"사워",ans:"신, 시큼한"},
+        {en:"meet",ph:"미트",ans:"만나다"},
+        {en:"lake",ph:"레이크",ans:"호수"},
+        {en:"look for",ph:"룩 포",ans:"~을 찾다"},
+        {en:"again",ph:"어게인",ans:"또, 다시"},
+        {en:"home",ph:"홈",ans:"집, 가정"},
+        {en:"kid",ph:"키드",ans:"어린이, 아이"},
+        {en:"baker",ph:"베이커",ans:"제빵사"},
+        {en:"cool",ph:"쿨",ans:"시원한"},
+        {en:"ready",ph:"레디",ans:"준비가 된"},
+        {en:"test",ph:"테스트",ans:"시험, 검사"},
+        {en:"with",ph:"위드",ans:"~와 함께"},
+        {en:"week",ph:"위크",ans:"주"},
+        {en:"far",ph:"파",ans:"먼, 멀리"},
+        {en:"sun",ph:"선",ans:"태양, 햇볕"},
+        {en:"town",ph:"타운",ans:"마을, 도심"},
+        {en:"rainy",ph:"레이니",ans:"비가 오는"},
+        {en:"hair",ph:"헤어",ans:"머리카락"},
+        {en:"funny",ph:"퍼니",ans:"우스운, 재미있는"},
+        {en:"sea",ph:"씨",ans:"바다"},
+        {en:"night",ph:"나이트",ans:"밤"},
+        {en:"people",ph:"피플",ans:"사람들"},
+        {en:"be good at",ph:"비 굿 앳",ans:"~을 잘하다"},
+        {en:"watch out(for)",ph:"워치 아웃 포",ans:"~을 주의, 조심하다"},
+        {en:"say",ph:"세이",ans:"말하다"},
+        {en:"where",ph:"웨어",ans:"어디에"},
+        {en:"bakery",ph:"베이커리",ans:"빵집"},
+        {en:"word",ph:"워드",ans:"단어, 말"},
+        {en:"thin",ph:"씬",ans:"얇은, 마른"},
+        {en:"play",ph:"플레이",ans:"놀다, 연주하다"},
+        {en:"child",ph:"차일드",ans:"어린이"},
+        {en:"after",ph:"애프터",ans:"~후에"},
+        {en:"start",ph:"스타트",ans:"시작하다"},
+        {en:"dark",ph:"다크",ans:"어두운"},
+        {en:"read",ph:"리드",ans:"읽다"},
+        {en:"evening",ph:"이브닝",ans:"저녁"},
+        {en:"open",ph:"오픈",ans:"열다, 열린"},
+        {en:"every",ph:"에브리",ans:"모든, 매~"},
+        {en:"fill",ph:"필",ans:"채우다"},
+        {en:"name",ph:"네임",ans:"이름"},
+        {en:"floor",ph:"플로어",ans:"바닥, 층"},
+        {en:"knife",ph:"나이프",ans:"칼"},
+        {en:"again and again",ph:"어게인 앤 어게인",ans:"몇 번이고, 되풀이해서"},
+        {en:"be happy with",ph:"비 해피 위드",ans:"~에 기뻐, 만족하다"},
+        {en:"easy",ph:"이지",ans:"쉬운"},
+        {en:"cute",ph:"큐트",ans:"귀여운"},
+        {en:"know",ph:"노우",ans:"알다"},
+        {en:"daughter",ph:"도터",ans:"딸"},
+        {en:"player",ph:"플레이어",ans:"선수"},
+        {en:"window",ph:"윈도우",ans:"창문"},
+        {en:"close",ph:"클로즈",ans:"닫다, 가까운"},
+        {en:"of",ph:"오브",ans:"~의"},
+        {en:"cook",ph:"쿡",ans:"요리하다, 요리사"},
+        {en:"then",ph:"덴",ans:"그 당시, 그때"},
+        {en:"fat",ph:"팻",ans:"살찐, 뚱뚱한"},
+        {en:"snow",ph:"스노우",ans:"눈, 눈이 오다"},
+        {en:"handsome",ph:"핸섬",ans:"잘생긴"},
+        {en:"sick",ph:"식",ans:"아픈, 병든"},
+        {en:"month",ph:"먼스",ans:"달, 월"},
+        {en:"work",ph:"워크",ans:"일하다, 공부하다"},
+        {en:"rock",ph:"락",ans:"바위, 돌"},
+        {en:"next",ph:"넥스트",ans:"다음의"},
+        {en:"after school",ph:"애프터 스쿨",ans:"방과 후에"},
+        {en:"say hello to",ph:"세이 헬로 투",ans:"~에게 안부를 전하다"},
+        {en:"end",ph:"엔드",ans:"끝, 종료"},
+        {en:"year",ph:"이어",ans:"해, 년"},
+        {en:"group",ph:"그룹",ans:"집단, 무리"},
+        {en:"there",ph:"데어",ans:"거기에"},
+        {en:"afternoon",ph:"애프터눈",ans:"오후"},
+        {en:"wear",ph:"웨어",ans:"입다, 쓰다"},
+        {en:"theater",ph:"시어터",ans:"극장"},
+        {en:"on",ph:"온",ans:"위에, (요일)에"},
+        {en:"hear",ph:"히어",ans:"듣다, 들리다"},
+        {en:"story",ph:"스토리",ans:"이야기"},
+        {en:"sound",ph:"사운드",ans:"소리, 음성"},
+        {en:"hungry",ph:"헝그리",ans:"배고픈"},
+        {en:"run",ph:"런",ans:"달리다"},
+        {en:"kind",ph:"카인드",ans:"친절한, 종류"},
+        {en:"round",ph:"라운드",ans:"둥근"},
+        {en:"loud",ph:"라우드",ans:"소리가 큰"},
+        {en:"push",ph:"푸시",ans:"밀다"},
+        {en:"bright",ph:"브라이트",ans:"밝은"},
+        {en:"next to",ph:"넥스트 투",ans:"~옆에"},
+        {en:"fill in",ph:"필 인",ans:"~을 채우다"},
+        {en:"air",ph:"에어",ans:"공기"},
+        {en:"hard",ph:"하드",ans:"어려운, 단단한"},
+        {en:"listen",ph:"리슨",ans:"듣다"},
+        {en:"full",ph:"풀",ans:"가득 찬"},
+        {en:"music",ph:"뮤직",ans:"음악"},
+        {en:"animal",ph:"애니멀",ans:"동물"},
+        {en:"beautiful",ph:"뷰티풀",ans:"아름다운"},
+        {en:"up",ph:"업",ans:"위로"},
+        {en:"weekend",ph:"위크엔드",ans:"주말"},
+        {en:"sit",ph:"싯",ans:"앉다"},
+        {en:"put",ph:"풋",ans:"놓다, 두다"},
+        {en:"warm",ph:"웜",ans:"따뜻한"},
+        {en:"pull",ph:"풀",ans:"당기다"},
+        {en:"north",ph:"노스",ans:"북쪽"},
+        {en:"noise",ph:"노이즈",ans:"소음"},
+        {en:"door",ph:"도어",ans:"문"},
+        {en:"size",ph:"사이즈",ans:"크기, 치수"},
+        {en:"how",ph:"하우",ans:"어떻게, 얼마나"},
+        {en:"go on",ph:"고 온",ans:"계속하다"},
+        {en:"fly",ph:"플라이",ans:"날다"},
+        {en:"way",ph:"웨이",ans:"방법, 길"},
+        {en:"earth",ph:"어스",ans:"지구, 흙"},
+        {en:"voice",ph:"보이스",ans:"목소리"},
+        {en:"get",ph:"겟",ans:"얻다, 받다"},
+        {en:"thick",ph:"띠크",ans:"두꺼운"},
+        {en:"knock",ph:"노크",ans:"노크하다"},
+        {en:"down",ph:"다운",ans:"아래로"},
+        {en:"fight",ph:"파이트",ans:"싸우다"},
+        {en:"fast",ph:"패스트",ans:"빠른, 빨리"},
+        {en:"ride",ph:"라이드",ans:"타다"},
+        {en:"grow",ph:"그로우",ans:"자라다"},
+        {en:"pocket",ph:"포켓",ans:"주머니"},
+        {en:"sweet",ph:"스위트",ans:"달콤한"},
+        {en:"hit",ph:"히트",ans:"때리다"},
+        {en:"mountain",ph:"마운틴",ans:"산"},
+        {en:"loudly",ph:"라우들리",ans:"크게"},
+        {en:"easily",ph:"이질리",ans:"쉽게"},
+        {en:"make fun of",ph:"메이크 펀 오브",ans:"놀리다"},
+        {en:"put on",ph:"풋 온",ans:"입다"},
+        {en:"sky",ph:"스카이",ans:"하늘"},
+        {en:"bicycle",ph:"바이시클",ans:"자전거"},
+        {en:"today",ph:"투데이",ans:"오늘"},
+        {en:"angry",ph:"앵그리",ans:"화난"},
+        {en:"slow",ph:"슬로우",ans:"느린"},
+        {en:"back",ph:"백",ans:"등, 뒤"},
+        {en:"rice",ph:"라이스",ans:"쌀, 밥"},
+        {en:"about",ph:"어바웃",ans:"~에 대하여"},
+        {en:"person",ph:"퍼슨",ans:"사람"},
+        {en:"cry",ph:"크라이",ans:"울다"},
+        {en:"hat",ph:"햇",ans:"모자"},
+        {en:"deep",ph:"딥",ans:"깊은"},
+        {en:"parent",ph:"패런트",ans:"부모"},
+        {en:"drive",ph:"드라이",ans:"운전하다"},
+        {en:"often",ph:"오픈",ans:"흔히, 자주"},
+        {en:"find",ph:"파인드",ans:"찾다, 발견하다"},
+        {en:"low",ph:"로우",ans:"낮은, 적은"},
+        {en:"fruit",ph:"프루트",ans:"과일"},
+        {en:"at last",ph:"앳 라스트",ans:"마침내"},
+        {en:"on one's way to",ph:"온 원즈 웨이 투",ans:"~로 가는 도중에"},
+        {en:"date",ph:"데이트",ans:"날짜"},
+        {en:"talk",ph:"토크",ans:"이야기하다"},
+        {en:"birthday",ph:"버스데이",ans:"생일"},
+        {en:"work",ph:"워크",ans:"일하다"},
+        {en:"here",ph:"히어",ans:"여기에"},
+        {en:"country",ph:"컨트리",ans:"시골, 나라"},
+        {en:"price",ph:"프라이스",ans:"값, 가격"},
+        {en:"by",ph:"바이",ans:"옆에, 에 의해"},
+        {en:"alone",ph:"얼론",ans:"혼자인, 외로운"},
+        {en:"high",ph:"하이",ans:"높은, 높이"},
+        {en:"set",ph:"셋",ans:"놓다, 맞추다"},
+        {en:"wall",ph:"월",ans:"벽, 담"},
+        {en:"driver",ph:"드라이버",ans:"운전자"},
+        {en:"each",ph:"이치",ans:"각자의, 각각의"},
+        {en:"slowly",ph:"슬로울리",ans:"느리게"},
+        {en:"table",ph:"테이블",ans:"탁자"},
+        {en:"pick",ph:"픽",ans:"고르다"},
+        {en:"cloud",ph:"클라우드",ans:"구름"},
+        {en:"find out",ph:"파인드 아웃",ans:"~을 알아내다"},
+        {en:"grow up",ph:"그로우 업",ans:"성장하다"},
+        {en:"alarm",ph:"알람",ans:"알람, 경보"},
+        {en:"weather",ph:"웨더",ans:"날씨"},
+        {en:"some",ph:"썸",ans:"약간의"},
+        {en:"think",ph:"띵크",ans:"생각하다"},
+        {en:"buy",ph:"바이",ans:"사다"},
+        {en:"speak",ph:"스피크",ans:"말하다"},
+        {en:"cloudy",ph:"클라우디",ans:"구름 낀, 흐린"},
+        {en:"before",ph:"비포",ans:"전에, 하기 전에"},
+        {en:"ship",ph:"쉽",ans:"배, 선박"},
+        {en:"east",ph:"이스트",ans:"동쪽"},
+        {en:"everyone",ph:"에브리원",ans:"모든 사람, 모두"},
+        {en:"paint",ph:"페인트",ans:"페인트, 그리다"},
+        {en:"tomorrow",ph:"투모로우",ans:"내일"},
+        {en:"map",ph:"맵",ans:"지도"},
+        {en:"half",ph:"하프",ans:"절반"},
+        {en:"idea",ph:"아이디어",ans:"생각"},
+        {en:"holiday",ph:"홀리데이",ans:"휴일"},
+        {en:"kick",ph:"킥",ans:"차다"},
+        {en:"by the way",ph:"바이 더 웨이",ans:"그나저나, 그런데"},
+        {en:"up and down",ph:"업 앤 다운",ans:"위아래로"},
+        {en:"life",ph:"라이프",ans:"삶, 인생"},
+        {en:"board",ph:"보드",ans:"게시판, 판자"},
+        {en:"brush",ph:"브러쉬",ans:"붓, 솔"},
+        {en:"tooth",ph:"투스",ans:"이, 치아"},
+        {en:"little",ph:"리틀",ans:"작은, 어린"},
+        {en:"call",ph:"콜",ans:"전화하다, 부르다"},
+        {en:"market",ph:"마켓",ans:"시장"},
+        {en:"around",ph:"어라운드",ans:"둘레에"},
+        {en:"speaker",ph:"스피크",ans:"말하는 사람"},
+        {en:"fine",ph:"파인",ans:"훌륭한"},
+        {en:"someday",ph:"썸데이",ans:"언젠가"},
+        {en:"much",ph:"머치",ans:"많은"},
+        {en:"sleep",ph:"슬립",ans:"잠자다"},
+        {en:"use",ph:"유즈",ans:"사용하다"},
+        {en:"why",ph:"와이",ans:"왜"},
+        {en:"present",ph:"프레젠트",ans:"선물, 현재의"},
+        {en:"pet",ph:"펫",ans:"애완동물"},
+        {en:"key",ph:"키",ans:"열쇠"},
+        {en:"get up",ph:"겟 업",ans:"일어나다"},
+        {en:"any",ph:"애니",ans:"아무것도, 약간"},
+        {en:"always",ph:"올웨이즈",ans:"항상"},
+        {en:"train",ph:"트레인",ans:"기차"},
+        {en:"want",ph:"원트",ans:"원하다"},
+        {en:"water",ph:"워터",ans:"물, 물을 주다"},
+        {en:"backpack",ph:"백팩",ans:"배낭"},
+        {en:"tonight",ph:"투나잇",ans:"오늘밤"},
+        {en:"because",ph:"비코즈",ans:"때문에, 왜냐하면"},
+        {en:"strong",ph:"스트롱",ans:"강한, 힘센"},
+        {en:"fall",ph:"폴",ans:"가을, 떨어지다"},
+        {en:"under",ph:"언더",ans:"~아래에"},
+        {en:"glass",ph:"글래스",ans:"유리, 잔"},
+        {en:"when",ph:"웬",ans:"언제"},
+        {en:"give",ph:"기브",ans:"주다"},
+        {en:"subway",ph:"서브웨이",ans:"지하철"},
+        {en:"street",ph:"스트리트",ans:"거리"},
+        {en:"police",ph:"폴리스",ans:"경찰"},
+        {en:"painter",ph:"페인터",ans:"화가"},
+        {en:"get well",ph:"겟 웰",ans:"나아지다, 회복하다"},
+        {en:"look around",ph:"룩 어라운드",ans:"둘레를 보다"},
+        {en:"busy",ph:"비지",ans:"바쁜, 혼잡한"},
+        {en:"early",ph:"얼리",ans:"일찍, 빨리"},
+        {en:"food",ph:"푸드",ans:"음식"},
+        {en:"almost",ph:"올모스트",ans:"거의"},
+        {en:"bring",ph:"브링",ans:"가져오다"},
+        {en:"draw",ph:"드로우",ans:"그리다"},
+        {en:"cross",ph:"크로스",ans:"건너다"},
+        {en:"over",ph:"오버",ans:"~위에"},
+        {en:"sing",ph:"싱",ans:"노래하다"},
+        {en:"doctor",ph:"닥터",ans:"의사"},
+        {en:"special",ph:"스페셜",ans:"특별한"},
+        {en:"week",ph:"위크",ans:"주"},
+        {en:"stair",ph:"스테어",ans:"계단"},
+        {en:"which",ph:"위치",ans:"어느것"},
+        {en:"road",ph:"로드",ans:"도로, 길"},
+        {en:"kitchen",ph:"키친",ans:"주방, 부엌"},
+        {en:"snack",ph:"스낵",ans:"간식"},
+        {en:"pair",ph:"페어",ans:"한 쌍"},
+        {en:"these days",ph:"디즈 데이즈",ans:"요즘"},
+        {en:"get it",ph:"겟 잇",ans:"이해하다"},
+        {en:"bottle",ph:"보틀",ans:"병"},
+        {en:"clock",ph:"클락",ans:"시계"},
+        {en:"dream",ph:"드림",ans:"꿈"},
+        {en:"complete",ph:"컴플리트",ans:"완료하다"},
+        {en:"season",ph:"시즌",ans:"계절"},
+        {en:"die",ph:"다이",ans:"죽다"},
+        {en:"store",ph:"스토어",ans:"상점, 가게"},
+        {en:"off",ph:"오프",ans:"떨어져, 멀리"},
+        {en:"sell",ph:"셀",ans:"팔다"},
+        {en:"mouth",ph:"마우스",ans:"입"},
+        {en:"glove",ph:"글래브",ans:"장갑"},
+        {en:"dish",ph:"디쉬",ans:"접시, 그릇"},
+        {en:"heart",ph:"하트",ans:"심장, 마음"},
+        {en:"picture",ph:"픽처",ans:"그림, 사진"},
+        {en:"leaf",ph:"리프",ans:"나뭇잎"},
+        {en:"hospital",ph:"하스피탈",ans:"병원"},
+        {en:"bridge",ph:"브릿지",ans:"다리"},
+        {en:"useful",ph:"유스풀",ans:"유용한"},
+        {en:"see a doctor",ph:"씨 어 닥터",ans:"진찰을 받다"},
+        {en:"pick up",ph:"픽 업",ans:"집어 올리다"},
+        {en:"age",ph:"에이지",ans:"나이"},
+        {en:"bath",ph:"배쓰",ans:"목욕"},
+        {en:"cousin",ph:"커즌",ans:"사촌"},
+        {en:"enjoy",ph:"인조이",ans:"즐기다"},
+        {en:"ask",ph:"애스크",ans:"묻다"},
+        {en:"only",ph:"온리",ans:"오직"},
+        {en:"take",ph:"테이크",ans:"가져가다, 잡다"},
+        {en:"into",ph:"인투",ans:"안으로"},
+        {en:"bread",ph:"브레드",ans:"빵"},
+        {en:"wash",ph:"워시",ans:"씻다"},
+        {en:"sure",ph:"슈어",ans:"확신하는"},
+        {en:"shoe",ph:"슈",ans:"신발, 구두"},
+        {en:"wind",ph:"윈드",ans:"바람"},
+        {en:"cheap",ph:"칩",ans:"싼"},
+        {en:"love",ph:"러브",ans:"사랑, 사랑하다"},
+        {en:"husband",ph:"허즈번드",ans:"남편"},
+        {en:"vegetable",ph:"베지터블",ans:"채소"},
+        {en:"teach",ph:"티치",ans:"가르치다"},
+        {en:"do the dishes",ph:"두 더 디시즈",ans:"설거지를 하다"},
+        {en:"be over",ph:"비 오버",ans:"끝나다"},
+        {en:"art",ph:"아트",ans:"예술, 미술"},
+        {en:"show",ph:"쇼",ans:"보여주다"},
+        {en:"airplane",ph:"에어플레인",ans:"비행기"},
+        {en:"become",ph:"비컴",ans:"~이 되다"},
+        {en:"boat",ph:"보트",ans:"보트"},
+        {en:"question",ph:"퀘스천",ans:"질문"},
+        {en:"send",ph:"센드",ans:"보내다, 발송하다"},
+        {en:"inside",ph:"인사이드",ans:"안쪽"},
+        {en:"jump",ph:"점프",ans:"점프하다"},
+        {en:"run",ph:"런",ans:"달리다"},
+        {en:"true",ph:"트루",ans:"진실한"},
+        {en:"move",ph:"무브",ans:"움직이다"},
+        {en:"dessert",ph:"디저트",ans:"후식"},
+        {en:"square",ph:"스퀘어",ans:"정사각형"},
+        {en:"world",ph:"월드",ans:"세계"},
+        {en:"restaurant",ph:"레스토랑",ans:"식당"},
+        {en:"picnic",ph:"피크닉",ans:"소풍"},
+        {en:"shop",ph:"숍",ans:"가게"},
+        {en:"for sure",ph:"포 슈어",ans:"확실히"},
+        {en:"arrive",ph:"어라이브",ans:"도착하다"},
+        {en:"bathroom",ph:"배스룸",ans:"욕실"},
+        {en:"case",ph:"케이스",ans:"케이스, 상자"},
+        {en:"library",ph:"라이브러리",ans:"도서관"},
+        {en:"online",ph:"온라인",ans:"온라인의"},
+        {en:"straight",ph:"스트레이트",ans:"똑바로"},
+        {en:"try",ph:"트라이",ans:"노력하다, 시도하다"},
+        {en:"near",ph:"니어",ans:"가까이, 가까운"},
+        {en:"begin",ph:"비긴",ans:"시작하다"},
+        {en:"finish",ph:"피니시",ans:"끝내다"},
+        {en:"boss",ph:"보스",ans:"상사"},
+        {en:"quick",ph:"퀵",ans:"빠른"},
+        {en:"rich",ph:"리치",ans:"부유한"},
+        {en:"stand",ph:"스탠드",ans:"서다"},
+        {en:"sorry",ph:"쏘리",ans:"미안한"},
+        {en:"lesson",ph:"레슨",ans:"레슨, 수업"},
+        {en:"wake",ph:"웨이크",ans:"깨다"},
+        {en:"let",ph:"렛",ans:"~하게 하다, 허락하다"},
+        {en:"come true",ph:"컴 트루",ans:"이루어지다"},
+        {en:"one by one",ph:"원 바이 원",ans:"한 사람씩"},
+        {en:"turn",ph:"턴",ans:"돌다"},
+        {en:"airport",ph:"에어포트",ans:"공항"},
+        {en:"catch",ph:"캐치",ans:"잡다"},
+        {en:"pretty",ph:"프리티",ans:"예쁜"},
+        {en:"breakfast",ph:"브렉퍼스트",ans:"아침식사"},
+        {en:"trip",ph:"트립",ans:"여행"},
+        {en:"hill",ph:"힐",ans:"언덕"},
+        {en:"as",ph:"애즈",ans:"~로써"},
+        {en:"homework",ph:"홈워크",ans:"숙제"},
+        {en:"touch",ph:"터치",ans:"만지다"},
+        {en:"side",ph:"사이드",ans:"측면"},
+        {en:"letter",ph:"레터",ans:"편지"},
+        {en:"middle",ph:"미들",ans:"중앙"},
+        {en:"fresh",ph:"프레시",ans:"신선한"},
+        {en:"poor",ph:"푸어",ans:"가난한"},
+        {en:"soft",ph:"소프트",ans:"부드러운"},
+        {en:"garden",ph:"가든",ans:"정원"},
+        {en:"gate",ph:"게이트",ans:"대문, 문"},
+        {en:"try on",ph:"트라이 온",ans:"~을 입어보다"},
+        {en:"talk on the phone",ph:"토크 온 더 폰",ans:"통화하다"},
+        {en:"gift",ph:"기프트",ans:"선물"},
+        {en:"laugh",ph:"래프",ans:"웃다"},
+        {en:"close",ph:"클로즈",ans:"닫다"},
+        {en:"strange",ph:"스트레인지",ans:"이상한"},
+        {en:"glad",ph:"글래드",ans:"기쁜"},
+        {en:"ahead",ph:"어헤드",ans:"앞으로, 앞에"},
+        {en:"corner",ph:"코너",ans:"구석"},
+        {en:"artist",ph:"아티스트",ans:"화가, 예술가"},
+        {en:"restroom",ph:"레스트룸",ans:"화장실, 욕실"},
+        {en:"straw",ph:"스트로",ans:"짚, 빨대"},
+        {en:"thank",ph:"땡크",ans:"감사하다"},
+        {en:"windy",ph:"윈디",ans:"바람이 부는"},
+        {en:"answer",ph:"앤서",ans:"대답하다"},
+        {en:"write",ph:"라이트",ans:"쓰다"},
+        {en:"money",ph:"머니",ans:"돈"},
+        {en:"painting",ph:"페인팅",ans:"그림"},
+        {en:"team",ph:"팀",ans:"팀"},
+        {en:"future",ph:"퓨처",ans:"미래"},
+        {en:"turn on",ph:"턴 온",ans:"켜다"},
+        {en:"show up",ph:"쇼 업",ans:"나타나다"},
+        {en:"top",ph:"탑",ans:"꼭대기"},
+        {en:"active",ph:"액티브",ans:"활동적인"},
+        {en:"bank",ph:"뱅크",ans:"은행"},
+        {en:"feed",ph:"피드",ans:"먹이를 주다"},
+        {en:"style",ph:"스타일",ans:"스타일"},
+        {en:"throat",ph:"쓰로트",ans:"목구멍"},
+        {en:"drawing",ph:"드로잉",ans:"그림"},
+        {en:"so",ph:"쏘",ans:"그래서"},
+        {en:"seat",ph:"시트",ans:"좌석"},
+        {en:"lie",ph:"라이",ans:"눕다, 거짓말하다"},
+        {en:"fish",ph:"피시",ans:"물고기"},
+        {en:"dress",ph:"드레스",ans:"드레스"},
+        {en:"away",ph:"어웨이",ans:"떨어져"},
+        {en:"job",ph:"잡",ans:"직업"},
+        {en:"right",ph:"라이트",ans:"맞는, 오른쪽의"},
+        {en:"museum",ph:"뮤지엄",ans:"박물관"},
+        {en:"lucky",ph:"럭키",ans:"운이 좋은"},
+        {en:"excellent",ph:"엑설런트",ans:"훌륭한"},
+        {en:"laugh at",ph:"래프 앳",ans:"~을 비웃다"},
+        {en:"thanks to",ph:"땡크스 투",ans:"~덕분에"},
+        {en:"tie",ph:"타이",ans:"묶다, 매다"},
+        {en:"smell",ph:"스멜",ans:"냄새가 나다"},
+        {en:"leave",ph:"리브",ans:"떠나다, 남기다"},
+        {en:"change",ph:"체인지",ans:"변화하다"},
+        {en:"fan",ph:"팬",ans:"부채, 선풍기"},
+        {en:"poster",ph:"포스터",ans:"포스터"},
+        {en:"wrong",ph:"롱",ans:"잘못된"},
+        {en:"across",ph:"어크로스",ans:"가로질러"},
+        {en:"volunteer",ph:"볼런티어",ans:"자원봉사자"},
+        {en:"type",ph:"타입",ans:"유형"},
+        {en:"great",ph:"그레이트",ans:"훌륭한"},
+        {en:"together",ph:"투게더",ans:"함께"},
+        {en:"hold",ph:"홀드",ans:"잡다"},
+        {en:"exit",ph:"엑시트",ans:"출구"},
+        {en:"favorite",ph:"페이버릿",ans:"매우 좋아하는"},
+        {en:"speed",ph:"스피드",ans:"속도"},
+        {en:"thing",ph:"띵",ans:"물건, 것"},
+        {en:"stage",ph:"스테이지",ans:"무대"},
+        {en:"get to",ph:"겟 투",ans:"~에 도착하다"},
+        {en:"action",ph:"액션",ans:"행동, 조치"},
+        {en:"sun",ph:"선",ans:"태양"},
+        {en:"wish",ph:"위시",ans:"바라다, 소원"},
+        {en:"number",ph:"넘버",ans:"수, 숫자"},
+        {en:"careful",ph:"케어풀",ans:"주의 깊은"},
+        {en:"fire",ph:"파이어",ans:"불, 불꽃"},
+        {en:"grandparent",ph:"그랜드패런트",ans:"조부모"},
+        {en:"between",ph:"비트윈",ans:"~사이에"},
+        {en:"clear",ph:"클리어",ans:"분명한, 맑은"},
+        {en:"break",ph:"브레이크",ans:"휴식"},
+        {en:"station",ph:"스테이션",ans:"역, 정류장"},
+        {en:"south",ph:"사우스",ans:"남쪽"},
+        {en:"free",ph:"프리",ans:"자유로운"},
+        {en:"smile",ph:"스마일",ans:"웃다, 미소 짓다"},
+        {en:"piece",ph:"피스",ans:"조각"},
+        {en:"umbrella",ph:"엄브렐라",ans:"우산"},
+        {en:"paper",ph:"페이퍼",ans:"종이"},
+        {en:"ticket",ph:"티켓",ans:"표"},
+        {en:"hold on",ph:"홀드 온",ans:"기다리다"},
+        {en:"take turns",ph:"테이크 턴즈",ans:"교대로 하다"},
+        {en:"add",ph:"애드",ans:"추가하다, 합하다"},
+        {en:"example",ph:"이그잼플",ans:"예, 사례"},
+        {en:"care",ph:"케어",ans:"돌봄"},
+        {en:"think",ph:"싱크",ans:"생각하다"},
+        {en:"manager",ph:"매니저",ans:"관리자"},
+        {en:"ocean",ph:"오션",ans:"대양, 바다"},
+        {en:"help",ph:"헬프",ans:"돕다"},
+        {en:"sunny",ph:"써니",ans:"화창한"},
+        {en:"choose",ph:"추즈",ans:"고르다"},
+        {en:"dentist",ph:"덴티스트",ans:"치과의사"},
+        {en:"swim",ph:"스윔",ans:"수영하다"},
+        {en:"throw",ph:"쓰로우",ans:"던지다"},
+        {en:"front",ph:"프론트",ans:"앞면"},
+        {en:"living room",ph:"리빙 룸",ans:"거실"},
+        {en:"message",ph:"메시지",ans:"메시지"},
+        {en:"need",ph:"니드",ans:"필요하다"},
+        {en:"west",ph:"웨스트",ans:"서쪽"},
+        {en:"rule",ph:"룰",ans:"규칙, 규정"},
+        {en:"ask for",ph:"애스크 포",ans:"~을 요구하다"},
+        {en:"take off",ph:"테이크 오프",ans:"~을 벗다"},
+        {en:"tell",ph:"텔",ans:"말하다"},
+        {en:"bone",ph:"본",ans:"뼈"},
+        {en:"stone",ph:"스톤",ans:"돌"},
+        {en:"keep",ph:"킵",ans:"유지하다"},
+        {en:"fix",ph:"픽스",ans:"고치다"},
+        {en:"diary",ph:"다이어리",ans:"일기"},
+        {en:"mathematics",ph:"매스매틱스",ans:"수학"},
+        {en:"below",ph:"빌로우",ans:"아래에"},
+        {en:"concert",ph:"콘서트",ans:"연주회, 콘서트"},
+        {en:"fact",ph:"팩트",ans:"사실"},
+        {en:"moment",ph:"모먼트",ans:"순간, 시점"},
+        {en:"soon",ph:"순",ans:"곧"},
+        {en:"park",ph:"파크",ans:"공원"},
+        {en:"triangle",ph:"트라이앵글",ans:"삼각형"},
+        {en:"once",ph:"원스",ans:"한 번"},
+        {en:"tired",ph:"타이어드",ans:"피곤한"},
+        {en:"hurt",ph:"허트",ans:"다치게 하다"},
+        {en:"line",ph:"라인",ans:"선, 줄"},
+        {en:"get on",ph:"겟 온",ans:"타다"},
+        {en:"for free",ph:"포 프리",ans:"무료로"},
+        {en:"also",ph:"올소",ans:"또한"},
+        {en:"activity",ph:"액티비티",ans:"활동"},
+        {en:"stop",ph:"스톱",ans:"멈추다"},
+        {en:"hope",ph:"호프",ans:"희망하다"},
+        {en:"science",ph:"사이언스",ans:"과학"},
+        {en:"cost",ph:"코스트",ans:"비용"},
+        {en:"bookstore",ph:"북스토어",ans:"서점"},
+        {en:"delicious",ph:"딜리셔스",ans:"맛있는"},
+        {en:"wood",ph:"우드",ans:"나무, 목재"},
+        {en:"musician",ph:"뮤지션",ans:"음악가"},
+        {en:"land",ph:"랜드",ans:"토지, 땅"},
+        {en:"mall",ph:"몰",ans:"쇼핑몰"},
+        {en:"point",ph:"포인트",ans:"요점, 가르키다"},
+        {en:"role",ph:"롤",ans:"역할, 임무"},
+        {en:"step",ph:"스텝",ans:"걸음, 단계"},
+        {en:"taste",ph:"테이스트",ans:"맛"},
+        {en:"text",ph:"텍스트",ans:"본문"},
+        {en:"moon",ph:"문",ans:"달"},
+        {en:"run away",ph:"런 어웨이",ans:"도망가다"},
+        {en:"line up",ph:"라인 업",ans:"줄을 서다"},
+        {en:"plan",ph:"플랜",ans:"계획"},
+        {en:"best",ph:"베스트",ans:"최고의"},
+        {en:"carefully",ph:"케어풀리",ans:"조심스럽게"},
+        {en:"forget",ph:"포겟",ans:"잊다"},
+        {en:"review",ph:"리뷰",ans:"평론, 복습"},
+        {en:"agree",ph:"어그리",ans:"동의하다"},
+        {en:"teen",ph:"틴",ans:"십대"},
+        {en:"above",ph:"어보브",ans:"보다 위에"},
+        {en:"scientist",ph:"사이언티스트",ans:"과학자"},
+        {en:"surprise",ph:"서프라이즈",ans:"놀라게 하다"},
+        {en:"other",ph:"아더",ans:"다른"},
+        {en:"magic",ph:"매직",ans:"마법"},
+        {en:"toe",ph:"토",ans:"발가락"},
+        {en:"skill",ph:"스킬",ans:"기술"},
+        {en:"wife",ph:"와이프",ans:"아내"},
+        {en:"mix",ph:"믹스",ans:"섞다"},
+        {en:"just",ph:"저스트",ans:"단지"},
+        {en:"tasty",ph:"테이스티",ans:"맛있는"},
+        {en:"give up",ph:"기브 업",ans:"포기하다"},
+        {en:"wide",ph:"와이드",ans:"넓은"},
+        {en:"area",ph:"에어리어",ans:"지역, 구역"},
+        {en:"band",ph:"밴드",ans:"밴드, 띠"},
+        {en:"nail",ph:"네일",ans:"손톱, 못"},
+        {en:"expensive",ph:"익스펜시브",ans:"비싼"},
+        {en:"correct",ph:"커렉트",ans:"정확한, 옳은"},
+        {en:"photograph",ph:"포토그래프",ans:"사진"},
+        {en:"along",ph:"얼롱",ans:"~을 따라서"},
+        {en:"build",ph:"빌드",ans:"짓다"},
+        {en:"proud",ph:"프라우드",ans:"자랑스러워하는"},
+        {en:"shake",ph:"쉐이크",ans:"흔들리다, 흔들다"},
+        {en:"ring",ph:"링",ans:"반지, 울리다"},
+        {en:"shape",ph:"쉐이프",ans:"모양"},
+        {en:"hunt",ph:"헌트",ans:"사냥하다"},
+        {en:"drop",ph:"드롭",ans:"떨어지다, 방울"},
+        {en:"sunglasses",ph:"선글라스",ans:"선글라스"},
+        {en:"film",ph:"필름",ans:"영화"},
+        {en:"office",ph:"오피스",ans:"사무실"},
+        {en:"each other",ph:"이치 아더",ans:"서로"},
+        {en:"few",ph:"퓨",ans:"거의 없는"},
+        {en:"danger",ph:"데인저",ans:"위험"},
+        {en:"camp",ph:"캠프",ans:"캠프, 야영지"},
+        {en:"building",ph:"빌딩",ans:"건물"},
+        {en:"afraid",ph:"어프레이드",ans:"두려워하는"},
+        {en:"basket",ph:"바스켓",ans:"바구니"},
+        {en:"note",ph:"노트",ans:"노트, 메모"},
+        {en:"until",ph:"언틸",ans:"~까지"},
+        {en:"singer",ph:"싱어",ans:"가수"},
+        {en:"someone",ph:"썸원",ans:"누구, 어떤 사람"},
+        {en:"teenager",ph:"틴에이저",ans:"십대"},
+        {en:"musical",ph:"뮤지컬",ans:"음악의, 뮤지컬"},
+        {en:"bake",ph:"베이크",ans:"굽다"},
+        {en:"pot",ph:"팟",ans:"솥, 냄비"},
+        {en:"plant",ph:"플랜트",ans:"식물, 심다"},
+        {en:"seafood",ph:"씨푸드",ans:"해산물"},
+        {en:"island",ph:"아일랜드",ans:"섬"},
+        {en:"grass",ph:"그래스",ans:"풀"},
+        {en:"stop by",ph:"스톱 바이",ans:"잠시 들르다"},
+        {en:"be proud of",ph:"비 프라우드 오브",ans:"~을 자랑스러워하다"},
+        {en:"blow",ph:"블로우",ans:"불다"},
+        {en:"cheer",ph:"치어",ans:"환호, 응원하다"},
+        {en:"false",ph:"폴스",ans:"거짓의, 틀린"},
+        {en:"gas",ph:"가스",ans:"기체, 가스"},
+        {en:"lose",ph:"루즈",ans:"잃어버리다, 지다"},
+        {en:"history",ph:"히스토리",ans:"역사"},
+        {en:"textbook",ph:"텍스트북",ans:"교과서"},
+        {en:"through",ph:"스루",ans:"지나서, 통하여"},
+        {en:"visit",ph:"비지트",ans:"방문하다"},
+        {en:"count",ph:"카운트",ans:"(수를) 세다"},
+        {en:"forest",ph:"포레스트",ans:"숲"},
+        {en:"hall",ph:"홀",ans:"복도, 홀"},
+        {en:"safe",ph:"세이프",ans:"안전한"},
+        {en:"pass",ph:"패스",ans:"지나가다, 통과하다"},
+        {en:"shadow",ph:"섀도우",ans:"그림자"},
+        {en:"miss",ph:"미스",ans:"놓치다, 그리워하다"},
+        {en:"same",ph:"세임",ans:"같은, 동일한"},
+        {en:"tail",ph:"테일",ans:"꼬리"},
+        {en:"a little",ph:"어 리틀",ans:"조금인, 약간의"},
+        {en:"fall in love",ph:"폴 인 러브",ans:"사랑에 빠지다"},
+        {en:"oil",ph:"오일",ans:"기름, 석유"},
+        {en:"difficult",ph:"디피컬트",ans:"어려운"},
+        {en:"travel",ph:"트래블",ans:"여행하다"},
+        {en:"part",ph:"파트",ans:"부분, 일부"},
+        {en:"mirror",ph:"미러",ans:"거울"},
+        {en:"boring",ph:"보링",ans:"지루한, 따분한"},
+        {en:"examination",ph:"이그재미네이션",ans:"시험"},
+        {en:"check",ph:"체크",ans:"확인하다"},
+        {en:"receive",ph:"리시브",ans:"받다"},
+        {en:"different",ph:"디퍼런트",ans:"다른"},
+        {en:"enough",ph:"이너프",ans:"충분한"},
+        {en:"worry",ph:"워리",ans:"걱정하다"},
+        {en:"still",ph:"스틸",ans:"아직도, 여전히"},
+        {en:"gym",ph:"짐",ans:"체육관"},
+        {en:"spend",ph:"스펜드",ans:"쓰다, 소비하다"},
+        {en:"rest",ph:"레스트",ans:"휴식하다"},
+        {en:"climb",ph:"클라임",ans:"오르다"},
+        {en:"lazy",ph:"레이지",ans:"게으른"},
+        {en:"cheer up",ph:"치어 업",ans:"격려하다"},
+        {en:"write down",ph:"라이트 다운",ans:"~을 적다"},
+        {en:"chef",ph:"셰프",ans:"요리사, 주방장"},
+        {en:"boil",ph:"보일",ans:"끓다"},
+        {en:"exciting",ph:"익사이팅",ans:"흥미진진한"},
+        {en:"already",ph:"올레디",ans:"이미, 벌써"},
+        {en:"speech",ph:"스피치",ans:"연설"},
+        {en:"guess",ph:"게스",ans:"추측하다"},
+        {en:"weight",ph:"웨이트",ans:"무게, 체중"},
+        {en:"anything",ph:"애니띵",ans:"무엇이든"},
+        {en:"sometimes",ph:"썸타임즈",ans:"때때로, 가끔"},
+        {en:"river",ph:"리버",ans:"강"},
+        {en:"farm",ph:"팜",ans:"농장"},
+        {en:"remember",ph:"리멤버",ans:"기억하다"},
+        {en:"interest",ph:"인터레스트",ans:"흥미, 관심"},
+        {en:"most",ph:"모스트",ans:"최대, 대부분의"},
+        {en:"place",ph:"플레이스",ans:"장소"},
+        {en:"company",ph:"컴퍼니",ans:"회사"},
+        {en:"space",ph:"스페이스",ans:"우주, 공간"},
+        {en:"health",ph:"헬스",ans:"건강"},
+        {en:"hand in",ph:"핸드 인",ans:"~을 제출하다"},
+        {en:"take out",ph:"테이크 아웃",ans:"~을 꺼내다"},
+        {en:"bored",ph:"보어드",ans:"지루한"},
+        {en:"goal",ph:"골",ans:"목표, 골"},
+        {en:"healthy",ph:"헬시",ans:"건강한"},
+        {en:"farmer",ph:"파머",ans:"농부"},
+        {en:"pay",ph:"페이",ans:"지불하다"},
+        {en:"stomach",ph:"스토머크",ans:"복부, 배, 위"},
+        {en:"something",ph:"썸띵",ans:"어떤 것"},
+        {en:"while",ph:"와일",ans:"~동안에"},
+        {en:"beat",ph:"비트",ans:"때리다, 이기다"},
+        {en:"hang",ph:"행",ans:"걸다, 매달다"},
+        {en:"lovely",ph:"러블리",ans:"사랑스러운"},
+        {en:"honest",ph:"어니스트",ans:"정직한"},
+        {en:"understand",ph:"언더스탠드",ans:"이해하다"},
+        {en:"interesting",ph:"인터레스팅",ans:"흥미로운, 재미있는"},
+        {en:"rope",ph:"로프",ans:"밧줄, 로프"},
+        {en:"pour",ph:"포어",ans:"붓다, 퍼붓다"},
+        {en:"club",ph:"클럽",ans:"동호회"},
+        {en:"writer",ph:"라이터",ans:"작가"},
+        {en:"on time",ph:"온 타임",ans:"제시간에"},
+        {en:"be worried about",ph:"비 워리드 어바웃",ans:"~에 대해 걱정하다"},
+        {en:"list",ph:"리스트",ans:"명단, 목록"},
+        {en:"project",ph:"프로젝트",ans:"프로젝트"},
+        {en:"carry",ph:"캐리",ans:"나르다, 운반하다"},
+        {en:"empty",ph:"엠프티",ans:"비어 있는"},
+        {en:"famous",ph:"페이머스",ans:"유명한"},
+        {en:"raise",ph:"레이즈",ans:"올리다, 기르다"},
+        {en:"drink",ph:"드링크",ans:"마시다"},
+        {en:"behind",ph:"비하인드",ans:"~의 뒤에"},
+        {en:"stay",ph:"스테이",ans:"머무르다"},
+        {en:"another",ph:"어나더",ans:"또 다른"},
+        {en:"surprising",ph:"서프라이징",ans:"놀라운"},
+        {en:"outside",ph:"아웃사이드",ans:"밖의"},
+        {en:"stick",ph:"스틱",ans:"막대기"},
+        {en:"vacation",ph:"베케이션",ans:"방학, 휴가"},
+        {en:"interested",ph:"인터레스티드",ans:"흥미 있는"},
+        {en:"dead",ph:"데드",ans:"죽은"},
+        {en:"beef",ph:"비프",ans:"소고기"},
+        {en:"excuse",ph:"익스큐즈",ans:"용서하다"},
+        {en:"work out",ph:"워크 아웃",ans:"운동하다"},
+        {en:"hang out",ph:"행 아웃",ans:"어울려 놀다"},
+        {en:"believe",ph:"빌리브",ans:"믿다"},
+        {en:"calm",ph:"캄",ans:"침착한"},
+        {en:"dangerous",ph:"데인저러스",ans:"위험한"},
+        {en:"festival",ph:"페스티벌",ans:"축제"},
+        {en:"shy",ph:"샤이",ans:"부끄러워하는"},
+        {en:"lonely",ph:"론리",ans:"외로운"},
+        {en:"spicy",ph:"스파이시",ans:"매콤한"},
+        {en:"wonder",ph:"원더",ans:"궁금하다"},
+        {en:"solve",ph:"솔브",ans:"풀다, 해결하다"},
+        {en:"fail",ph:"페일",ans:"실패하다"},
+        {en:"neighbor",ph:"네이버",ans:"이웃"},
+        {en:"ground",ph:"그라운드",ans:"지면, 땅"},
+        {en:"circle",ph:"서클",ans:"원"},
+        {en:"important",ph:"임포턴트",ans:"중요한"},
+        {en:"pond",ph:"폰드",ans:"연못"},
+        {en:"role",ph:"롤",ans:"역할"},
+        {en:"deer",ph:"디어",ans:"사슴"},
+        {en:"practice",ph:"프랙티스",ans:"연습하다"},
+        {en:"get out of",ph:"겟 아웃 오브",ans:"~에서 나가다"},
+        {en:"give it a try",ph:"기브 잇 어 트라이",ans:"한번 해보다"},
+        {en:"bill",ph:"빌",ans:"고지서"},
+        {en:"collect",ph:"콜렉트",ans:"수집하다"},
+        {en:"surprised",ph:"서프라이즈드",ans:"놀란"},
+        {en:"join",ph:"조인",ans:"가입하다"},
+        {en:"blank",ph:"블랭크",ans:"빈칸"},
+        {en:"problem",ph:"프라블럼",ans:"문제"},
+        {en:"crash",ph:"크래시",ans:"충돌하다"},
+        {en:"however",ph:"하우에버",ans:"그러나"},
+        {en:"secret",ph:"시크릿",ans:"비밀"},
+        {en:"record",ph:"레코드",ans:"기록"},
+        {en:"hometown",ph:"홈타운",ans:"고향"},
+        {en:"race",ph:"레이스",ans:"경주"},
+        {en:"bowl",ph:"보울",ans:"그릇"},
+        {en:"daily",ph:"데일리",ans:"매일의"},
+        {en:"newspaper",ph:"뉴스페이퍼",ans:"신문"},
+        {en:"tip",ph:"팁",ans:"조언"},
+        {en:"wonderful",ph:"원더풀",ans:"아주 멋진"},
+        {en:"own",ph:"오운",ans:"자신의"},
+        {en:"be interested in",ph:"비 인터레스티드 인",ans:"~에 관심이 있다"},
+        {en:"believe in",ph:"빌리브 인",ans:"~의 존재를 믿다"},
+        {en:"lift",ph:"리프트",ans:"들어 올리다"},
+        {en:"bottom",ph:"바텀",ans:"바닥"},
+        {en:"hole",ph:"홀",ans:"구멍"},
+        {en:"dialogue",ph:"다이얼로그",ans:"대화"},
+        {en:"real",ph:"리얼",ans:"진짜의"},
+        {en:"news",ph:"뉴스",ans:"뉴스"},
+        {en:"jungle",ph:"정글",ans:"정글"},
+        {en:"form",ph:"폼",ans:"유형"},
+        {en:"sunlight",ph:"선라이트",ans:"햇빛"},
+        {en:"contest",ph:"콘테스트",ans:"대회"},
+        {en:"brave",ph:"브레이브",ans:"용감한"},
+        {en:"hurry",ph:"허리",ans:"서두르다"},
+        {en:"magazine",ph:"매거진",ans:"잡지"},
+        {en:"welcome",ph:"웰컴",ans:"환영하다"},
+        {en:"sleepy",ph:"슬리피",ans:"졸린"},
+        {en:"protect",ph:"프로텍트",ans:"보호하다"},
+        {en:"matter",ph:"매터",ans:"문제"},
+        {en:"fast",ph:"패스트",ans:"빠른"},
+        {en:"take place",ph:"테이크 플레이스",ans:"개최되다"},
+        {en:"fry",ph:"프라이",ans:"튀기다, 볶다"},
+        {en:"advice",ph:"어드바이스",ans:"조언, 충고"},
+        {en:"course",ph:"코스",ans:"강좌, 항로"},
+        {en:"habit",ph:"해빗",ans:"습관, 버릇"},
+        {en:"sign",ph:"사인",ans:"표지판, 서명하다"},
+        {en:"perfect",ph:"퍼펙트",ans:"완벽한"},
+        {en:"heat",ph:"히트",ans:"열, 더위"},
+        {en:"without",ph:"위드아웃",ans:"~없이"},
+        {en:"colorful",ph:"컬러풀",ans:"다채로운"},
+        {en:"never",ph:"네버",ans:"결코 ~않다"},
+        {en:"tea",ph:"티",ans:"차"},
+        {en:"trouble",ph:"트러블",ans:"문제"},
+        {en:"okay",ph:"오케이",ans:"괜찮은"},
+        {en:"honey",ph:"허니",ans:"꿀"},
+        {en:"sport",ph:"스포츠",ans:"스포츠"},
+        {en:"friendly",ph:"프렌들리",ans:"친절한"},
+        {en:"serve",ph:"서브",ans:"제공하다"},
+        {en:"uniform",ph:"유니폼",ans:"제복"},
+        {en:"all the time",ph:"올 더 타임",ans:"항상, 늘"},
+        {en:"for a while",ph:"포 어 와일",ans:"잠시 동안"},
+        {en:"field",ph:"필",ans:"들판, 밭"},
+        {en:"blind",ph:"블라인드",ans:"눈먼"},
+        {en:"center",ph:"센터",ans:"중심"},
+        {en:"headache",ph:"헤드에이크",ans:"두통"},
+        {en:"score",ph:"스코어",ans:"점수"},
+        {en:"pilot",ph:"파일럿",ans:"조종사"},
+        {en:"everything",ph:"에브리띵",ans:"모든 것"},
+        {en:"during",ph:"듀어링",ans:"~동안"},
+        {en:"luck",ph:"럭",ans:"행운"},
+        {en:"nickname",ph:"닉네임",ans:"별명"},
+        {en:"mistake",ph:"미스테이크",ans:"실수"},
+        {en:"greet",ph:"그리트",ans:"인사하다"},
+        {en:"sharp",ph:"샤프",ans:"날카로운"},
+        {en:"usual",ph:"유주얼",ans:"평소의"},
+        {en:"cough",ph:"커프",ans:"기침하다"},
+        {en:"fashion",ph:"패션",ans:"유행 패션"},
+        {en:"plate",ph:"플레이트",ans:"접시"},
+        {en:"meal",ph:"밀",ans:"식사"},
+        {en:"of course",ph:"오브 코스",ans:"물론"},
+        {en:"on one's own",ph:"온 원즈 오운",ans:"스스로"},
+        {en:"mind",ph:"마인드",ans:"마음, 정신"},
+        {en:"win",ph:"윈",ans:"이기다"},
+        {en:"amazing",ph:"어메이징",ans:"놀라운"},
+        {en:"borrow",ph:"바로우",ans:"빌리다"},
+        {en:"comic",ph:"코믹",ans:"만화의"},
+        {en:"garbage",ph:"가비지",ans:"쓰레기"},
+        {en:"sale",ph:"세일",ans:"판매"},
+        {en:"nothing",ph:"낫띵",ans:"아무것도 ~아니다"},
+        {en:"director",ph:"디렉터",ans:"감독"},
+        {en:"cell phone",ph:"셀 폰",ans:"휴대전화"},
+        {en:"tour",ph:"투어",ans:"여행"},
+        {en:"share",ph:"쉐어",ans:"공유하다"},
+        {en:"wrap",ph:"랩",ans:"싸다, 포장하다"},
+        {en:"energy",ph:"에너지",ans:"에너지"},
+        {en:"gather",ph:"개더",ans:"모이다"},
+        {en:"happen",ph:"해픈",ans:"일어나다"},
+        {en:"usually",ph:"유주얼리",ans:"대개"},
+        {en:"prize",ph:"프라이즈",ans:"상"},
+        {en:"cut down",ph:"컷 다운",ans:"줄이다"},
+        {en:"would like to",ph:"우드 라이크 투",ans:"~하고 싶다"},
+        {en:"joy",ph:"조이",ans:"기쁨"},
+        {en:"award",ph:"어워드",ans:"상"},
+        {en:"nurse",ph:"너스",ans:"간호사"},
+        {en:"quiet",ph:"콰이어트",ans:"조용한"},
+        {en:"cartoon",ph:"카툰",ans:"만화"},
+        {en:"excited",ph:"익사이티드",ans:"신이 난"},
+        {en:"melt",ph:"멜트",ans:"녹다"},
+        {en:"grade",ph:"그레이드",ans:"학년, 성적"},
+        {en:"helpful",ph:"헬프풀",ans:"도움이 되는"},
+        {en:"post",ph:"포스트",ans:"우편, 게시하다"},
+        {en:"sentence",ph:"센텐스",ans:"문장"},
+        {en:"trash",ph:"트래쉬",ans:"쓰레기"},
+        {en:"design",ph:"디자인",ans:"디자인"},
+        {en:"subject",ph:"서브젝트",ans:"과목, 주제"},
+        {en:"match",ph:"매치",ans:"경기"},
+        {en:"village",ph:"빌리지",ans:"마을"},
+        {en:"insect",ph:"인섹트",ans:"곤충"},
+        {en:"possible",ph:"파서블",ans:"가능한"},
+        {en:"count on",ph:"카운트 온",ans:"~을 믿다"},
+        {en:"at the same time",ph:"앳 더 세임 타임",ans:"동시에"},
+        {en:"event",ph:"이벤트",ans:"행사"},
+        {en:"nature",ph:"네이처",ans:"자연"},
+        {en:"level",ph:"레벨",ans:"수준"},
+        {en:"create",ph:"크리에이트",ans:"창조하다"},
+        {en:"shout",ph:"샤우트",ans:"소리치다"},
+        {en:"animation",ph:"애니메이션",ans:"애니메이션"},
+        {en:"cause",ph:"코즈",ans:"원인"},
+        {en:"information",ph:"인포메이션",ans:"정보"},
+        {en:"designer",ph:"디자이너",ans:"디자이너"},
+        {en:"pack",ph:"팩",ans:"싸다"},
+        {en:"meeting",ph:"미팅",ans:"회의"},
+        {en:"quiz",ph:"퀴즈",ans:"퀴즈"},
+        {en:"wise",ph:"와이즈",ans:"지혜로운"},
+        {en:"fantastic",ph:"판타스틱",ans:"환상적인"},
+        {en:"piece",ph:"피스",ans:"한 조각"},
+        {en:"opinion",ph:"오피니언",ans:"의견"},
+        {en:"relax",ph:"릴랙스",ans:"휴식을 취하다"},
+        {en:"flat",ph:"플랫",ans:"평평한"},
+        {en:"throw away",ph:"쓰로우 어웨이",ans:"버리다"}
     ];
-    let currentSentenceIdx = 0;
+
+    const wordList = rawData;
+
+    let currentTestWordIdx = 0;
 
     // ==========================================
-    // 3. 초등 기초 영문법 100문제
-    // ==========================================
-    let grammarList = [
-        // [be동사]
-        { q: "I ( ) a student.", options: ["am", "are", "is", "be"], ans: 1 },
-        { q: "You ( ) my best friend.", options: ["am", "is", "are", "was"], ans: 3 },
-        { q: "He ( ) a good teacher.", options: ["am", "are", "is", "be"], ans: 3 },
-        { q: "She ( ) very tall and pretty.", options: ["are", "is", "am", "be"], ans: 2 },
-        { q: "It ( ) a cute cat.", options: ["am", "are", "be", "is"], ans: 4 },
-        { q: "We ( ) in the classroom now.", options: ["is", "am", "are", "was"], ans: 3 },
-        { q: "They ( ) playing soccer.", options: ["am", "is", "are", "was"], ans: 3 },
-        { q: "I ( ) ten years old.", options: ["am", "are", "is", "were"], ans: 1 },
-        { q: "My name ( ) Tom.", options: ["am", "are", "is", "be"], ans: 3 },
-        { q: "My parents ( ) very kind.", options: ["is", "am", "are", "was"], ans: 3 },
-        { q: "The book ( ) on the desk.", options: ["am", "are", "is", "be"], ans: 3 },
-        { q: "The cats ( ) sleeping under the tree.", options: ["is", "am", "are", "was"], ans: 3 },
-        { q: "( ) you hungry?", options: ["Am", "Are", "Is", "Do"], ans: 2 },
-        { q: "( ) he your brother?", options: ["Am", "Are", "Is", "Do"], ans: 3 },
-        { q: "( ) it a bird?", options: ["Am", "Are", "Is", "Does"], ans: 3 },
-        { q: "I ( ) not tired today.", options: ["am", "are", "is", "be"], ans: 1 },
-        { q: "She ( ) not my sister.", options: ["am", "are", "is", "be"], ans: 3 },
-        { q: "We ( ) not sad at all.", options: ["am", "is", "are", "was"], ans: 3 },
-        { q: "I ( ) at home yesterday.", options: ["am", "was", "were", "is"], ans: 2 },
-        { q: "You ( ) late this morning.", options: ["was", "were", "are", "is"], ans: 2 },
-        { q: "He ( ) sick yesterday.", options: ["were", "was", "is", "are"], ans: 2 },
-        { q: "She ( ) at the park last week.", options: ["was", "were", "is", "are"], ans: 1 },
-        { q: "It ( ) cold yesterday.", options: ["were", "is", "was", "are"], ans: 3 },
-        { q: "We ( ) busy last night.", options: ["was", "were", "are", "is"], ans: 2 },
-        { q: "They ( ) happy yesterday.", options: ["was", "is", "were", "are"], ans: 3 },
-        { q: "The movie ( ) very good.", options: ["was", "were", "are", "is"], ans: 1 },
-        { q: "The apples ( ) sweet and fresh.", options: ["was", "were", "is", "am"], ans: 2 },
-        { q: "( ) you at home yesterday?", options: ["Was", "Were", "Are", "Is"], ans: 2 },
-        { q: "( ) she at school last Friday?", options: ["Were", "Was", "Is", "Are"], ans: 2 },
-        { q: "I ( ) not angry yesterday.", options: ["was", "were", "am", "is"], ans: 1 },
-
-        // [인칭대명사]
-        { q: "( ) love my family.", options: ["Me", "My", "I", "Mine"], ans: 3 },
-        { q: "Do you know ( )?", options: ["he", "his", "him", "he's"], ans: 3 },
-        { q: "This is ( ) book.", options: ["I", "me", "my", "mine"], ans: 3 },
-        { q: "That pen is ( ).", options: ["I", "me", "my", "mine"], ans: 4 },
-        { q: "( ) is my best friend.", options: ["She", "Her", "Hers", "He"], ans: 1 },
-        { q: "I like ( ) very much.", options: ["she", "her", "hers", "she's"], ans: 2 },
-        { q: "These are ( ) shoes.", options: ["she", "her", "hers", "he"], ans: 2 },
-        { q: "This bag is ( ).", options: ["she", "her", "hers", "him"], ans: 3 },
-        { q: "( ) are good students.", options: ["Us", "Our", "We", "Ours"], ans: 3 },
-        { q: "Our teacher teaches ( ) English.", options: ["we", "our", "us", "ours"], ans: 3 },
-        { q: "Welcome to ( ) house.", options: ["we", "our", "us", "ours"], ans: 2 },
-        { q: "This classroom is ( ).", options: ["we", "our", "us", "ours"], ans: 4 },
-        { q: "( ) play baseball every day.", options: ["They", "Their", "Them", "Theirs"], ans: 1 },
-        { q: "I play with ( ).", options: ["they", "their", "them", "theirs"], ans: 3 },
-        { q: "That is ( ) school.", options: ["they", "their", "them", "theirs"], ans: 2 },
-        { q: "Those bikes are ( ).", options: ["they", "their", "them", "theirs"], ans: 4 },
-        { q: "( ) is a big tree.", options: ["It", "Its", "It's", "They"], ans: 1 },
-        { q: "Look at ( )!", options: ["it", "its", "it's", "they"], ans: 1 },
-        { q: "The dog wags ( ) tail.", options: ["it", "its", "it's", "it is"], ans: 2 },
-        { q: "( ) are my brother.", options: ["You", "Your", "Yours", "I"], ans: 1 },
-        { q: "I can help ( ).", options: ["you", "your", "yours", "you're"], ans: 1 },
-        { q: "Is this ( ) pencil?", options: ["you", "your", "yours", "you're"], ans: 2 },
-        { q: "This seat is ( ).", options: ["you", "your", "yours", "you're"], ans: 3 },
-        { q: "Give ( ) the ball, please.", options: ["I", "my", "me", "mine"], ans: 3 },
-        { q: "He is ( ) father.", options: ["I", "my", "me", "mine"], ans: 2 },
-        { q: "She likes ( ) new dress.", options: ["she", "her", "hers", "him"], ans: 2 },
-        { q: "( ) is going to the store.", options: ["He", "His", "Him", "They"], ans: 1 },
-        { q: "We saw ( ) at the park.", options: ["they", "their", "them", "theirs"], ans: 3 },
-        { q: "That car is ( ).", options: ["he", "his", "him", "her"], ans: 2 },
-        { q: "( ) is a nice day.", options: ["It", "Its", "This", "That"], ans: 1 },
-
-        // [일반동사]
-        { q: "I ( ) apples.", options: ["like", "likes", "liking", "to like"], ans: 1 },
-        { q: "You ( ) very fast.", options: ["run", "runs", "running", "to run"], ans: 1 },
-        { q: "He ( ) English every day.", options: ["study", "studies", "studying", "studied"], ans: 2 },
-        { q: "She ( ) a book at night.", options: ["read", "reads", "reading", "to read"], ans: 2 },
-        { q: "It ( ) a lot in summer.", options: ["rain", "rains", "raining", "to rain"], ans: 2 },
-        { q: "We ( ) soccer after school.", options: ["play", "plays", "playing", "to play"], ans: 1 },
-        { q: "They ( ) to school together.", options: ["go", "goes", "going", "to go"], ans: 1 },
-        { q: "My mom ( ) delicious food.", options: ["make", "makes", "making", "to make"], ans: 2 },
-        { q: "My dad ( ) his car.", options: ["wash", "washes", "washing", "to wash"], ans: 2 },
-        { q: "The bird ( ) in the sky.", options: ["fly", "flys", "flies", "flying"], ans: 3 },
-        { q: "I ( ) not like carrots.", options: ["do", "does", "am", "is"], ans: 1 },
-        { q: "You ( ) not have a pet.", options: ["do", "does", "are", "is"], ans: 1 },
-        { q: "He ( ) not know the answer.", options: ["do", "does", "is", "are"], ans: 2 },
-        { q: "She ( ) not eat meat.", options: ["do", "does", "is", "are"], ans: 2 },
-        { q: "It ( ) not snow in summer.", options: ["do", "does", "is", "are"], ans: 2 },
-        { q: "We ( ) not watch TV often.", options: ["do", "does", "are", "is"], ans: 1 },
-        { q: "They ( ) not play tennis.", options: ["do", "does", "are", "is"], ans: 1 },
-        { q: "( ) you like pizza?", options: ["Do", "Does", "Are", "Is"], ans: 1 },
-        { q: "( ) he have a sister?", options: ["Do", "Does", "Is", "Are"], ans: 2 },
-        { q: "( ) she live in Seoul?", options: ["Do", "Does", "Is", "Are"], ans: 2 },
-        { q: "( ) they play the piano?", options: ["Do", "Does", "Are", "Is"], ans: 1 },
-        { q: "Do you like apples? - Yes, I ( ).", options: ["do", "does", "am", "are"], ans: 1 },
-        { q: "Does he like dogs? - No, he ( ).", options: ["don't", "doesn't", "isn't", "aren't"], ans: 2 },
-        { q: "Tom ( ) to music every day.", options: ["listen", "listens", "listening", "to listen"], ans: 2 },
-        { q: "Mina and Jisu ( ) songs well.", options: ["sing", "sings", "singing", "to sing"], ans: 1 },
-        { q: "The dog ( ) fast.", options: ["run", "runs", "running", "to run"], ans: 2 },
-        { q: "Cats ( ) milk.", options: ["like", "likes", "liking", "to like"], ans: 1 },
-        { q: "My sister ( ) her room every day.", options: ["clean", "cleans", "cleaning", "to clean"], ans: 2 },
-        { q: "I ( ) up early in the morning.", options: ["wake", "wakes", "waking", "to wake"], ans: 1 },
-        { q: "She ( ) her face.", options: ["wash", "washes", "washing", "to wash"], ans: 2 },
-        { q: "We ( ) lunch at 12 o'clock.", options: ["have", "has", "having", "to have"], ans: 1 },
-        { q: "He ( ) a brother.", options: ["have", "has", "having", "to have"], ans: 2 },
-        { q: "They ( ) two dogs.", options: ["have", "has", "having", "to have"], ans: 1 },
-        { q: "The baby ( ) a lot.", options: ["cry", "cries", "crys", "crying"], ans: 2 },
-        { q: "Jane ( ) a bike well.", options: ["ride", "rides", "riding", "to ride"], ans: 2 },
-        { q: "I ( ) my homework after school.", options: ["do", "does", "doing", "to do"], ans: 1 },
-        { q: "He ( ) his homework in the evening.", options: ["do", "does", "doing", "to do"], ans: 2 },
-        { q: "( ) your friend like soccer?", options: ["Do", "Does", "Is", "Are"], ans: 2 },
-        { q: "What ( ) you want?", options: ["do", "does", "are", "is"], ans: 1 },
-        { q: "Where ( ) she live?", options: ["do", "does", "is", "are"], ans: 2 }
-    ];
-    let currentGrammarIdx = 0;
-
-
-    // ==========================================
-    // 📅 4. 학생 데이터 자동 기록 로직
+    // 📅 학생 데이터 자동 기록 로직
     // ==========================================
     function getTodayKey() {
         const today = new Date();
         return `${today.getFullYear()}-${String(today.getMonth()+1).padStart(2,'0')}-${String(today.getDate()).padStart(2,'0')}`;
     }
 
-    function recordProgress(type) {
+    function recordProgress() {
         const dateKey = getTodayKey();
-        let history = JSON.parse(localStorage.getItem('surinamu_history')) || {};
+        let history = JSON.parse(localStorage.getItem('surinamu_history2')) || {};
         if (!history[dateKey]) {
-            history[dateKey] = { word: 0, sentence: 0, grammar: 0 };
+            history[dateKey] = { wordTest: 0 };
         }
-        history[dateKey][type]++;
-        localStorage.setItem('surinamu_history', JSON.stringify(history));
+        history[dateKey].wordTest++;
+        localStorage.setItem('surinamu_history2', JSON.stringify(history));
     }
 
     function renderHistory() {
         const historyList = document.getElementById('history-list');
         historyList.innerHTML = '';
-        let history = JSON.parse(localStorage.getItem('surinamu_history')) || {};
+        let history = JSON.parse(localStorage.getItem('surinamu_history2')) || {};
         
         const dates = Object.keys(history).sort((a, b) => new Date(b) - new Date(a));
         
         if(dates.length === 0) {
-            historyList.innerHTML = '<p style="color:#A0AEC0; font-weight:bold; margin-top:30px;">아직 학습 기록이 없습니다.<br>문제를 풀면 이곳에 기록됩니다.</p>';
+            historyList.innerHTML = '<p style="color:#A0AEC0; font-weight:bold; margin-top:30px;">아직 학습 기록이 없습니다.<br>단어 테스트를 풀면 이곳에 기록됩니다.</p>';
             return;
         }
 
         dates.forEach(date => {
             const data = history[date];
-            const total = data.word + data.sentence + data.grammar;
-            
             let stamp = '';
-            if(total >= 20) stamp = '<span class="stamp-excellent">참 잘했어요!</span>'; 
+            if(data.wordTest >= 20) stamp = '<span class="stamp-excellent">참 잘했어요!</span>'; 
             
             const displayDate = date.replace(/-/g, '. ');
             
@@ -456,42 +1048,26 @@
             card.className = 'history-card';
             card.innerHTML = `
                 <div class="history-date">${displayDate} ${stamp}</div>
-                <div class="history-stat">📘 단어 학습: <span style="color:#3182ce;">${data.word}문제</span> 완료</div>
-                <div class="history-stat">📝 영작 훈련: <span style="color:#3182ce;">${data.sentence}문제</span> 완료</div>
-                <div class="history-stat">✅ 문법 테스트: <span style="color:#3182ce;">${data.grammar}문제</span> 완료</div>
+                <div class="history-stat">📘 단어 테스트: <span style="color:#3182ce;">${data.wordTest}문제</span> 완료</div>
             `;
             historyList.appendChild(card);
         });
     }
 
     // ==========================================
-    // 탭 전환 및 음성 재생 공통 로직
+    // 탭 전환 로직
     // ==========================================
     function showSection(sectionId, btnElement) {
-        stopLooping(); 
         document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
         document.querySelectorAll('.menu-btn').forEach(el => el.classList.remove('active'));
         
         document.getElementById(sectionId).classList.add('active');
         if(btnElement) btnElement.classList.add('active');
-        
-        if(sectionId === 'sentence-section') {
-            isLooping = true;
-            playAndLoop();
-        }
     }
 
-    function checkAdminPassword() {
-        const pw = prompt("관리자 비밀번호 4자리를 입력하세요.");
-        if (pw === "7777") {
-            showSection('admin-section', null);
-            document.querySelector('.admin-btn').classList.add('active');
-            renderAdminLists();
-        } else if (pw !== null) {
-            alert("비밀번호가 틀렸습니다.");
-        }
-    }
-
+    // ==========================================
+    // 음성 재생 함수
+    // ==========================================
     function speak(text) {
         window.speechSynthesis.cancel();
         const utterance = new SpeechSynthesisUtterance(text);
@@ -508,42 +1084,46 @@
         return array;
     }
 
-    // --- 무한 반복 재생 기능 ---
-    let isLooping = false;
-    let loopTimeout;
-
-    function playAndLoop() {
-        if(!isLooping || sentenceList.length === 0) return;
-        window.speechSynthesis.cancel(); 
-
-        const text = sentenceList[currentSentenceIdx].en;
-        const utterance = new SpeechSynthesisUtterance(text);
-        utterance.lang = 'en-US';
-        utterance.rate = 0.8;
+    // ==========================================
+    // 1. 단어장 (리스트) 기능
+    // ==========================================
+    function showWordList() {
+        const startNumInput = document.getElementById('listStartNum').value;
+        let startIdx = parseInt(startNumInput) - 1;
         
-        utterance.onend = function() {
-            if(isLooping) loopTimeout = setTimeout(playAndLoop, 1000); 
-        };
-        window.speechSynthesis.speak(utterance);
-    }
+        if (isNaN(startIdx) || startIdx < 0) startIdx = 0;
+        if (startIdx >= wordList.length) startIdx = wordList.length - 1;
 
-    function stopLooping() {
-        isLooping = false;
-        window.speechSynthesis.cancel();
-        clearTimeout(loopTimeout);
+        const container = document.getElementById('word-list-container');
+        container.innerHTML = '';
+        
+        const endIdx = Math.min(startIdx + 30, wordList.length);
+        
+        for (let i = startIdx; i < endIdx; i++) {
+            const w = wordList[i];
+            const item = document.createElement('div');
+            item.className = 'word-list-item';
+            item.innerHTML = `
+                <div class="word-list-en">${i + 1}. ${w.en} <span class="word-list-ph">[${w.ph}]</span></div>
+                <div class="word-list-ko">${w.ans}</div>
+            `;
+            container.appendChild(item);
+        }
+        
+        if (startIdx < wordList.length) {
+            speak(wordList[startIdx].en);
+        }
     }
 
     // ==========================================
-    // 개별 학습 로직 (단어, 영작, 문법)
+    // 2. 단어 테스트 기능
     // ==========================================
-    
-    // 1. 단어
-    function loadWord() {
+    function loadTestWord() {
         if(wordList.length === 0) return;
-        const currentQ = wordList[currentWordIdx];
-        document.getElementById('word-status').innerText = `문제 ${currentWordIdx + 1} / ${wordList.length}`;
-        document.getElementById('word-display').innerText = currentQ.en;
-        const optionsDiv = document.getElementById('word-options');
+        const currentQ = wordList[currentTestWordIdx];
+        document.getElementById('test-status').innerText = `문제 ${currentTestWordIdx + 1} / ${wordList.length}`;
+        document.getElementById('test-display').innerText = currentQ.en;
+        const optionsDiv = document.getElementById('test-options');
         optionsDiv.innerHTML = '';
 
         let options = [{ text: currentQ.ans, correct: true }];
@@ -563,187 +1143,46 @@
             btn.onclick = function() {
                 if(opt.correct) {
                     btn.classList.add('correct-btn');
-                    recordProgress('word'); // 단어 기록
-                    setTimeout(() => { nextWord(); }, 500); 
+                    recordProgress();
+                    setTimeout(() => { nextTestWord(); }, 500); 
                 } else { 
-                    alert('❌ 틀렸습니다. 다시 생각해보세요!'); speakWord(); 
+                    alert('❌ 틀렸습니다. 다시 생각해보세요!'); speakTestWord(); 
                 }
             };
             optionsDiv.appendChild(btn);
         });
-        speakWord();
-    }
-    function speakWord() { speak(wordList[currentWordIdx].en); }
-    function nextWord() {
-        if (currentWordIdx + 1 < wordList.length) { currentWordIdx++; loadWord(); } 
-        else { alert('단어 학습을 모두 완료했습니다! 🎉'); }
-    }
-    function jumpToWord() {
-        const num = parseInt(document.getElementById('startNum').value);
-        if (num >= 1 && num <= wordList.length) { currentWordIdx = num - 1; loadWord(); } 
-        else { alert(`1에서 ${wordList.length} 사이의 번호를 입력하세요.`); }
+        speakTestWord();
     }
 
-    // 2. 영작
-    function loadSentence() {
-        if(sentenceList.length === 0) return;
-        stopLooping(); 
-        
-        const currentSenObj = sentenceList[currentSentenceIdx];
-        document.getElementById('sentence-status').innerText = `문제 ${currentSentenceIdx + 1} / ${sentenceList.length}`;
-        document.getElementById('sentence-ko-text').innerText = currentSenObj.ko;
-        
-        const answerArea = document.getElementById('answer-area');
-        answerArea.innerHTML = '';
-        answerArea.style.backgroundColor = 'var(--bg-color)';
-        answerArea.style.borderColor = 'var(--main-green)';
-        
-        const scrambledDiv = document.getElementById('scrambled-words');
-        scrambledDiv.innerHTML = '';
-        
-        let words = currentSenObj.en.split(' ');
-        let scrambled = shuffleArray([...words]);
-        
-        scrambled.forEach(word => {
-            const btn = document.createElement('button');
-            btn.className = 'word-block';
-            btn.innerText = word;
-            btn.onclick = function() {
-                if (this.parentElement.id === 'scrambled-words') {
-                    answerArea.appendChild(this);
-                } else {
-                    scrambledDiv.appendChild(this);
-                }
-                if (scrambledDiv.children.length === 0) checkSentence();
-            };
-            scrambledDiv.appendChild(btn);
-        });
-
-        isLooping = true;
-        playAndLoop();
+    function speakTestWord() { 
+        speak(wordList[currentTestWordIdx].en); 
     }
     
-    function checkSentence() {
-        const answerArea = document.getElementById('answer-area');
-        const studentSentence = Array.from(answerArea.children).map(btn => btn.innerText).join(' ');
-        
-        if (studentSentence === sentenceList[currentSentenceIdx].en) {
-            answerArea.style.backgroundColor = '#C6F6D5';
-            answerArea.style.borderColor = '#48BB78';
-            recordProgress('sentence'); // 영작 기록
-            stopLooping(); 
-            setTimeout(() => { nextSentence(); }, 800); 
-        } else {
-            answerArea.style.backgroundColor = '#FED7D7';
-            setTimeout(() => { answerArea.style.backgroundColor = 'var(--bg-color)'; }, 400);
-        }
-    }
-    
-    function nextSentence() {
-        if (currentSentenceIdx + 1 < sentenceList.length) {
-            currentSentenceIdx++; loadSentence();
+    function nextTestWord() {
+        if (currentTestWordIdx + 1 < wordList.length) { 
+            currentTestWordIdx++; 
+            loadTestWord(); 
         } else { 
-            stopLooping();
-            alert('영작 학습을 모두 완료했습니다! 🎉'); 
-        }
-    }
-
-    function jumpToSentence() {
-        const num = parseInt(document.getElementById('startSenNum').value);
-        if (num >= 1 && num <= sentenceList.length) { 
-            currentSentenceIdx = num - 1; loadSentence(); 
-        } else { 
-            alert(`1에서 ${sentenceList.length} 사이의 번호를 입력하세요.`); 
-        }
-    }
-
-    // 3. 문법
-    function loadGrammar() {
-        if(grammarList.length === 0) return;
-        const currentQ = grammarList[currentGrammarIdx];
-        
-        document.getElementById('grammar-status').innerText = `문제 ${currentGrammarIdx + 1} / ${grammarList.length}`;
-        document.getElementById('grammar-question-text').innerText = currentQ.q;
-        
-        const optionsDiv = document.getElementById('grammar-options');
-        optionsDiv.innerHTML = '';
-        
-        currentQ.options.forEach((optText, index) => {
-            const btn = document.createElement('button');
-            btn.className = 'option-btn';
-            btn.innerText = `${index + 1}. ${optText}`;
-            btn.onclick = function() {
-                if (index + 1 === currentQ.ans) {
-                    btn.classList.add('correct-btn');
-                    recordProgress('grammar'); // 문법 기록
-                    setTimeout(() => {
-                        if (currentGrammarIdx + 1 < grammarList.length) {
-                            currentGrammarIdx++;
-                            loadGrammar();
-                        } else {
-                            alert('문법 학습을 모두 완료했습니다! 🎉');
-                        }
-                    }, 500); 
-                } else {
-                    alert('❌ 오답입니다. 다시 생각해보세요!');
-                }
-            };
-            optionsDiv.appendChild(btn);
-        });
-    }
-
-    function jumpToGrammar() {
-        const num = parseInt(document.getElementById('startGrammarNum').value);
-        if (num >= 1 && num <= grammarList.length) {
-            currentGrammarIdx = num - 1;
-            loadGrammar();
-        } else {
-            alert(`1에서 ${grammarList.length} 사이의 번호를 입력하세요.`);
-        }
-    }
-
-    // ==========================================
-    // ⚙️ 관리자 모드
-    // ==========================================
-    function renderAdminLists() {
-        const sList = document.getElementById('admin-sentence-list');
-        sList.innerHTML = '';
-        sentenceList.forEach((senObj, idx) => {
-            const item = document.createElement('div');
-            item.className = 'admin-list-item';
-            item.innerHTML = `<div><strong>[${idx + 1}]</strong> ${senObj.en}<br><span style="color:#C53030;">${senObj.ko}</span></div>
-                              <button class="delete-btn" onclick="deleteSentence(${idx})">삭제</button>`;
-            sList.appendChild(item);
-        });
-    }
-
-    function deleteSentence(idx) {
-        if(confirm('삭제하시겠습니까?')) {
-            sentenceList.splice(idx, 1);
-            if(currentSentenceIdx >= sentenceList.length) currentSentenceIdx = Math.max(0, sentenceList.length - 1);
-            renderAdminLists(); loadSentence();
+            alert('단어 테스트를 모두 완료했습니다! 🎉'); 
         }
     }
     
-    function addSentence() {
-        const en = document.getElementById('admin-sentence-en').value.trim();
-        const ko = document.getElementById('admin-sentence-ko').value.trim();
-        if(!en || !ko) { alert('영어 문장과 한글 뜻을 모두 입력해주세요!'); return; }
-        sentenceList.push({ en: en, ko: ko }); 
-        document.getElementById('admin-sentence-en').value = '';
-        document.getElementById('admin-sentence-ko').value = '';
-        renderAdminLists(); loadSentence();
-        alert('추가되었습니다.');
+    function jumpToTestWord() {
+        const num = parseInt(document.getElementById('testStartNum').value);
+        if (num >= 1 && num <= wordList.length) { 
+            currentTestWordIdx = num - 1; 
+            loadTestWord(); 
+        } else { 
+            alert(`1에서 ${wordList.length} 사이의 번호를 입력하세요.`); 
+        }
     }
 
     // ==========================================
     // 초기 실행
     // ==========================================
     window.onload = function() {
-        loadWord();
-        loadSentence(); 
-        loadGrammar();
-        renderAdminLists();
+        showWordList();
+        loadTestWord();
     };
 </script>
 
