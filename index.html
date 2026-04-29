@@ -70,6 +70,29 @@
         .history-stat { font-size: 16px; color: var(--text-dark); margin: 6px 0; font-weight: bold;}
         .stamp-excellent { color: #E53E3E; font-weight: 900; font-size: 22px; float: right; transform: rotate(-15deg); border: 3px solid #E53E3E; padding: 4px 10px; border-radius: 10px; opacity: 0.9;}
 
+        /* ✏️ 철자쓰기 테스트 스타일 */
+        .spell-score-bar { display: flex; justify-content: center; gap: 20px; background: #F0FFF4; border-radius: 12px; padding: 10px 15px; margin-bottom: 14px; font-size: 14px; font-weight: bold; color: #276749; border: 1px solid #9AE6B4; }
+        .spell-score-bar span { color: var(--main-green); font-size: 16px; }
+        .spell-meaning-box { font-size: 2.2rem; font-weight: 900; color: var(--main-green); margin: 16px 0 8px 0; min-height: 60px; line-height: 1.3; word-break: break-word; }
+        .spell-char-hint { font-size: 14px; color: #718096; margin-bottom: 10px; font-weight: bold; }
+        .spell-hint-btn { background: none; border: 1px dashed #CBD5E0; border-radius: 8px; padding: 5px 14px; font-size: 13px; color: #718096; cursor: pointer; margin-bottom: 12px; transition: 0.2s; }
+        .spell-hint-btn:hover { background: #EDF2F7; }
+        .spell-input-wrap { display: flex; gap: 10px; justify-content: center; align-items: center; margin-bottom: 12px; }
+        .spell-input { flex: 1; max-width: 270px; padding: 14px 16px; font-size: 18px; font-weight: bold; border: 2px solid #E2E8F0; border-radius: 14px; outline: none; text-align: center; transition: 0.2s; letter-spacing: 2px; }
+        .spell-input:focus { border-color: var(--light-green); box-shadow: 0 0 0 3px rgba(72,187,120,0.15); }
+        .spell-input.spell-ok { border-color: var(--light-green); background: #F0FFF4; color: #276749; }
+        .spell-input.spell-fail { border-color: #FC8181; background: #FFF5F5; animation: shake 0.4s; }
+        .spell-submit-btn { padding: 14px 18px; background: var(--main-green); color: white; border: none; border-radius: 14px; font-size: 16px; font-weight: bold; cursor: pointer; transition: 0.2s; box-shadow: 0 4px 10px rgba(47,133,90,0.25); }
+        .spell-submit-btn:active { transform: scale(0.95); }
+        .spell-feedback { font-size: 16px; font-weight: 900; min-height: 26px; margin-bottom: 6px; }
+        .spell-answer-reveal { font-size: 15px; color: #718096; margin-bottom: 12px; min-height: 20px; }
+        .spell-nav { display: flex; gap: 10px; justify-content: center; margin-top: 10px; }
+        .spell-nav-btn { flex: 1; max-width: 140px; padding: 12px; border: none; border-radius: 12px; font-weight: bold; font-size: 15px; cursor: pointer; transition: 0.2s; }
+        .spell-prev-btn { background: #EDF2F7; color: #4A5568; }
+        .spell-next-btn { background: var(--main-green); color: white; box-shadow: 0 4px 10px rgba(47,133,90,0.25); }
+        .spell-nav-btn:active { transform: scale(0.95); }
+        .spell-progress-text { font-size: 15px; color: #718096; margin-bottom: 6px; font-weight: 800; background: #EDF2F7; display: inline-block; padding: 5px 15px; border-radius: 20px; }
+
         /* 🐉 진화 시스템 UI */
         .evolution-box { background: white; border-radius: 18px; padding: 15px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.05); border: 2px solid #E2E8F0; position: relative; overflow: hidden;}
         .evo-content { position: relative; z-index: 1; display: flex; flex-direction: column; align-items: center;}
@@ -96,7 +119,8 @@
     <div class="nav-container">
         <button id="nav-wordlist" class="menu-btn active" onclick="showSection('wordlist-section', this)">1. 단어장</button>
         <button id="nav-wordtest" class="menu-btn" onclick="showSection('wordtest-section', this)">2. 단어테스트</button>
-        <button id="nav-history" class="menu-btn" onclick="showSection('history-section', this); renderHistory();">3. 기록</button>
+        <button id="nav-spell" class="menu-btn" onclick="showSection('spell-section', this)">3. 철자</button>
+        <button id="nav-history" class="menu-btn" onclick="showSection('history-section', this); renderHistory();">4. 기록</button>
     </div>
 
     <div id="wordlist-section" class="section active">
@@ -129,6 +153,44 @@
         <div id="test-display" class="word-box">Loading...</div>
         <button class="play-btn" onclick="speakTestWord()">🔊 원어민 발음 듣기</button>
         <div id="test-options"></div>
+    </div>
+
+    <div id="spell-section" class="section">
+        <div class="setup-section">
+            <strong>시작 번호: </strong>
+            <input type="number" id="spellStartNum" value="1" min="1" style="width: 70px; text-align: center;">
+            <button onclick="loadSpellTest()">찾기 🔍</button>
+        </div>
+
+        <div class="spell-score-bar">
+            정답 <span id="spell-correct-count">0</span> &nbsp;|&nbsp; 오답 <span id="spell-wrong-count">0</span> &nbsp;|&nbsp; 남은 <span id="spell-remain-count">30</span>
+        </div>
+
+        <div class="spell-progress-text" id="spell-progress">문제 1 / 30</div>
+
+        <div id="spell-meaning" class="spell-meaning-box">단어 뜻이 표시됩니다</div>
+        <div class="spell-char-hint" id="spell-char-hint"></div>
+        <button class="spell-hint-btn" onclick="showSpellHint()">💡 힌트 (첫 글자)</button>
+
+        <div class="spell-input-wrap">
+            <input type="text" class="spell-input" id="spell-input"
+                placeholder="영어 철자를 입력하세요"
+                autocomplete="off" autocorrect="off" autocapitalize="none" spellcheck="false"
+                onkeydown="if(event.key==='Enter') checkSpell()">
+            <button class="spell-submit-btn" onclick="checkSpell()">확인 ✓</button>
+        </div>
+
+        <div id="spell-feedback" class="spell-feedback"></div>
+        <div id="spell-answer-reveal" class="spell-answer-reveal"></div>
+
+        <div>
+            <button class="play-btn" onclick="speakSpellWord()">🔊 발음 듣기</button>
+        </div>
+
+        <div class="spell-nav">
+            <button class="spell-nav-btn spell-prev-btn" onclick="moveSpell(-1)">◀ 이전</button>
+            <button class="spell-nav-btn spell-next-btn" onclick="moveSpell(1)">다음 ▶</button>
+        </div>
     </div>
 
     <div id="history-section" class="section">
@@ -1333,11 +1395,137 @@
     }
 
     // ==========================================
+    // 3. 철자쓰기 테스트
+    // ==========================================
+    let spellWords = [];
+    let spellIdx = 0;
+    let spellCorrect = 0;
+    let spellWrong = 0;
+    let spellAnswered = [];
+    let spellHintShown = false;
+
+    function loadSpellTest() {
+        initAudioContext();
+        const startNum = parseInt(document.getElementById('spellStartNum').value) || 1;
+        let startIdx = Math.max(0, startNum - 1);
+        if (startIdx >= wordList.length) startIdx = wordList.length - 1;
+        const endIdx = Math.min(startIdx + 30, wordList.length);
+        spellWords = wordList.slice(startIdx, endIdx);
+        spellIdx = 0;
+        spellCorrect = 0;
+        spellWrong = 0;
+        spellAnswered = new Array(spellWords.length).fill(null);
+        updateSpellScoreBar();
+        renderSpellQuestion();
+    }
+
+    function renderSpellQuestion() {
+        if (spellWords.length === 0) return;
+        const w = spellWords[spellIdx];
+        document.getElementById('spell-progress').innerText = `문제 ${spellIdx + 1} / ${spellWords.length}`;
+        document.getElementById('spell-meaning').innerText = w.ans;
+        document.getElementById('spell-char-hint').innerText = `(${w.en.length}글자)`;
+        document.getElementById('spell-feedback').innerText = '';
+        document.getElementById('spell-feedback').style.color = '';
+        document.getElementById('spell-answer-reveal').innerText = '';
+        const inp = document.getElementById('spell-input');
+        inp.value = '';
+        inp.className = 'spell-input';
+        inp.disabled = false;
+        spellHintShown = false;
+
+        const answered = spellAnswered[spellIdx];
+        if (answered === 'correct') {
+            document.getElementById('spell-feedback').innerText = '✅ 정답!';
+            document.getElementById('spell-feedback').style.color = '#276749';
+            inp.value = w.en;
+            inp.className = 'spell-input spell-ok';
+            inp.disabled = true;
+        } else if (answered === 'wrong') {
+            document.getElementById('spell-feedback').innerText = '❌ 오답';
+            document.getElementById('spell-feedback').style.color = '#C53030';
+            document.getElementById('spell-answer-reveal').innerText = `정답: ${w.en}`;
+            inp.className = 'spell-input spell-fail';
+            inp.disabled = true;
+        }
+        inp.focus();
+    }
+
+    function checkSpell() {
+        if (spellWords.length === 0) return;
+        initAudioContext();
+        const w = spellWords[spellIdx];
+        if (spellAnswered[spellIdx] !== null) {
+            if (spellIdx < spellWords.length - 1) { spellIdx++; renderSpellQuestion(); }
+            return;
+        }
+        const userInput = document.getElementById('spell-input').value.trim().toLowerCase();
+        const cleanCorrect = w.en.toLowerCase().replace(/\(.*?\)/g, '').replace(/\[.*?\]/g, '').trim();
+        const isCorrect = userInput === w.en.toLowerCase() || userInput === cleanCorrect;
+
+        if (isCorrect) {
+            document.getElementById('spell-feedback').innerText = '✅ 정답!';
+            document.getElementById('spell-feedback').style.color = '#276749';
+            document.getElementById('spell-input').className = 'spell-input spell-ok';
+            document.getElementById('spell-input').disabled = true;
+            spellAnswered[spellIdx] = 'correct';
+            spellCorrect++;
+            playCorrectSFX();
+            recordProgress();
+        } else {
+            document.getElementById('spell-feedback').innerText = '❌ 오답!';
+            document.getElementById('spell-feedback').style.color = '#C53030';
+            document.getElementById('spell-input').className = 'spell-input spell-fail';
+            document.getElementById('spell-answer-reveal').innerText = `정답: ${w.en}`;
+            document.getElementById('spell-input').disabled = true;
+            spellAnswered[spellIdx] = 'wrong';
+            spellWrong++;
+            playWrongSFX();
+            speak(w.en);
+        }
+        updateSpellScoreBar();
+
+        if (spellIdx < spellWords.length - 1) {
+            setTimeout(() => { spellIdx++; renderSpellQuestion(); }, 1200);
+        } else {
+            setTimeout(() => {
+                alert(`🎉 철자쓰기 완료!\n정답: ${spellCorrect} / ${spellWords.length}\n오답: ${spellWrong} / ${spellWords.length}`);
+            }, 1200);
+        }
+    }
+
+    function moveSpell(dir) {
+        spellIdx = Math.max(0, Math.min(spellWords.length - 1, spellIdx + dir));
+        renderSpellQuestion();
+    }
+
+    function showSpellHint() {
+        if (spellWords.length === 0 || spellAnswered[spellIdx] !== null) return;
+        if (!spellHintShown) {
+            const w = spellWords[spellIdx];
+            document.getElementById('spell-char-hint').innerText = `첫 글자: "${w.en[0]}"  (${w.en.length}글자)`;
+            spellHintShown = true;
+        }
+    }
+
+    function speakSpellWord() {
+        if (spellWords.length > 0) speak(spellWords[spellIdx].en);
+    }
+
+    function updateSpellScoreBar() {
+        const remain = spellWords.length - spellAnswered.filter(a => a !== null).length;
+        document.getElementById('spell-correct-count').innerText = spellCorrect;
+        document.getElementById('spell-wrong-count').innerText = spellWrong;
+        document.getElementById('spell-remain-count').innerText = remain;
+    }
+
+    // ==========================================
     // 초기 실행
     // ==========================================
     window.onload = function() {
         showWordList();
         loadTestWord();
+        loadSpellTest();
     };
 </script>
 
