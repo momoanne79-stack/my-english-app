@@ -105,6 +105,107 @@
         #combo-display { position: absolute; top: 30%; left: 50%; transform: translate(-50%, -50%) scale(0.5); font-size: 3.5rem; font-weight: 900; color: #DD6B20; text-shadow: 0 4px 15px rgba(221, 107, 32, 0.4), 2px 2px 0px #FFF; opacity: 0; pointer-events: none; z-index: 100;}
         .animate-combo { animation: popCombo 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
         @keyframes popCombo { 0% { opacity: 0; transform: translate(-50%, -30%) scale(0.5); } 20% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); } 80% { opacity: 1; transform: translate(-50%, -50%) scale(1); } 100% { opacity: 0; transform: translate(-50%, -60%) scale(0.8); } }
+
+        /* 🖨️ 한글 발음 테스트지 출력 */
+        .print-pronunciation-btn {
+            background: #2F855A !important;
+            color: white !important;
+            border: none !important;
+            border-radius: 8px !important;
+            font-weight: 900 !important;
+            cursor: pointer !important;
+            box-shadow: 0 4px 10px rgba(47,133,90,0.25);
+        }
+        #print-pronunciation-sheet { display: none; }
+
+        @page {
+            size: A4 portrait;
+            margin: 10mm;
+        }
+
+        @media print {
+            html, body {
+                width: 210mm;
+                min-height: 297mm;
+                margin: 0 !important;
+                padding: 0 !important;
+                background: white !important;
+                color: #111 !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+
+            body > *:not(#print-pronunciation-sheet) {
+                display: none !important;
+            }
+
+            #print-pronunciation-sheet {
+                display: block !important;
+                box-sizing: border-box;
+                width: 190mm;
+                margin: 0 auto;
+                font-family: 'Malgun Gothic', 'Apple SD Gothic Neo', sans-serif;
+                text-align: left;
+            }
+
+            .print-sheet-title {
+                text-align: center;
+                font-size: 15pt;
+                font-weight: 900;
+                margin: 0 0 5mm 0;
+                letter-spacing: -0.5px;
+            }
+
+            .print-range {
+                text-align: center;
+                font-size: 9pt;
+                margin: -3mm 0 5mm 0;
+                color: #555;
+            }
+
+            .print-pronunciation-columns {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 7mm;
+                width: 100%;
+            }
+
+            .print-pronunciation-column {
+                border: 1.5px solid #111;
+                padding: 4mm 4mm 3mm 4mm;
+                box-sizing: border-box;
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+
+            .print-pronunciation-row {
+                display: flex;
+                align-items: center;
+                height: 7.8mm;
+                font-size: 12pt;
+                font-weight: 700;
+                border-bottom: 1px dotted #777;
+                box-sizing: border-box;
+                line-height: 1.1;
+            }
+
+            .print-pronunciation-row:last-child {
+                border-bottom: none;
+            }
+
+            .print-pronunciation-num {
+                display: inline-block;
+                width: 9mm;
+                flex: 0 0 9mm;
+                font-weight: 900;
+            }
+
+            .print-pronunciation-text {
+                flex: 1;
+                word-break: keep-all;
+            }
+        }
+
     </style>
 </head>
 <body>
@@ -128,6 +229,7 @@
             <strong>단어 이동: </strong> 
             <input type="number" id="listStartNum" value="1" min="1" style="width: 70px; text-align: center;">
             <button onclick="showWordList()">30개 보기 🚀</button>
+            <button class="print-pronunciation-btn" onclick="printPronunciationSheet()">한글 발음 테스트지 출력 🖨️</button>
         </div>
         <p style="font-size: 13px; color: #718096; font-weight:bold; margin-bottom: 15px;">※ 입력한 번호부터 30개의 단어가 표시됩니다.</p>
         <div id="word-list-container"></div>
@@ -199,6 +301,8 @@
         <div id="history-list"></div>
     </div>
 </div>
+
+<div id="print-pronunciation-sheet"></div>
 
 <script>
     // ==========================================
@@ -1186,6 +1290,64 @@
     ];
 
     const wordList = rawData;
+
+
+    // ==========================================
+    // 🖨️ 한글 발음 테스트지 출력
+    // ==========================================
+    function escapeHtmlForPrint(value) {
+        return String(value ?? '')
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
+    }
+
+    function getPronunciationPrintStartIndex() {
+        const input = document.getElementById('listStartNum');
+        let startIdx = parseInt(input.value, 10) - 1;
+
+        if (isNaN(startIdx) || startIdx < 0) startIdx = 0;
+        if (startIdx >= wordList.length) startIdx = Math.max(0, wordList.length - 1);
+
+        input.value = startIdx + 1;
+        return startIdx;
+    }
+
+    function makePronunciationRows(words) {
+        let rows = '';
+        for (let i = 0; i < 30; i++) {
+            const pronunciation = words[i] ? words[i].ph : '';
+            rows += `
+                <div class="print-pronunciation-row">
+                    <span class="print-pronunciation-num">${i + 1}.</span>
+                    <span class="print-pronunciation-text">${escapeHtmlForPrint(pronunciation)}</span>
+                </div>
+            `;
+        }
+        return rows;
+    }
+
+    function printPronunciationSheet() {
+        const startIdx = getPronunciationPrintStartIndex();
+        const words = wordList.slice(startIdx, startIdx + 30);
+        const rowsHtml = makePronunciationRows(words);
+        const endNum = Math.min(startIdx + 30, wordList.length);
+
+        const sheet = document.getElementById('print-pronunciation-sheet');
+        sheet.innerHTML = `
+            <div class="print-sheet-title">한글 발음 테스트지</div>
+            <div class="print-range">선택 단어: ${startIdx + 1}번 ~ ${endNum}번</div>
+            <div class="print-pronunciation-columns">
+                <div class="print-pronunciation-column">${rowsHtml}</div>
+                <div class="print-pronunciation-column">${rowsHtml}</div>
+            </div>
+        `;
+
+        setTimeout(() => window.print(), 80);
+    }
+
 
     let currentTestWordIdx = 0;
     let isAnswering = false; // 중복 클릭 방지용
